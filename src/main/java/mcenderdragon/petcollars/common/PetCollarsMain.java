@@ -3,8 +3,15 @@ package mcenderdragon.petcollars.common;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import mcenderdragon.petcollars.common.collar.AbstractCollarInstance;
+import mcenderdragon.petcollars.common.collar.CollarCapProvider;
+import mcenderdragon.petcollars.common.collar.DynamicCollarInstance;
+import mcenderdragon.petcollars.common.collar.ICollar;
 import net.minecraft.block.Blocks;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.passive.AnimalEntity;
+import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.nbt.INBT;
 import net.minecraft.nbt.IntNBT;
 import net.minecraft.util.Direction;
@@ -31,7 +38,7 @@ public class PetCollarsMain
 	public static final String MODID = "petcollars";
 	
 	 // Directly reference a log4j logger.
-    private static final Logger LOGGER = LogManager.getFormatterLogger("Pet Collars");
+    public static final Logger LOGGER = LogManager.getFormatterLogger("Pet Collars");
 
     @CapabilityInject(ICollar.class)
     public static Capability<ICollar> COLLAR = null;
@@ -41,6 +48,8 @@ public class PetCollarsMain
 		FMLJavaModLoadingContext.get().getModEventBus().addListener(this::setup);
 		
 		MinecraftForge.EVENT_BUS.register(this);
+		
+		PendantRegistry.init();
 	}
 	
 	private void setup(final FMLCommonSetupEvent event)
@@ -50,7 +59,7 @@ public class PetCollarsMain
             @Override
             public INBT writeNBT(Capability<ICollar> capability, ICollar instance, Direction side)
             {
-               	
+               	return null;
             }
 
             @Override
@@ -59,7 +68,7 @@ public class PetCollarsMain
                
             }
         },
-        () -> new EnergyStorage(1000));
+        () -> new DynamicCollarInstance(new CompoundNBT(), null));
 		
         // some preinit code
         LOGGER.info("HELLO FROM PREINIT");
@@ -67,16 +76,13 @@ public class PetCollarsMain
     }
 	
 	@SubscribeEvent
-	public void attachCapabilitiesEvent(AttachCapabilitiesEvent<AnimalEntity> event)
+	public void attachCapabilitiesEvent(AttachCapabilitiesEvent<Entity> event)
 	{
-		event.addCapability(new ResourceLocation(MODID, "collar"), new ICapabilityProvider()
+		if(event.getObject() instanceof AnimalEntity)
 		{
-			
-			@Override
-			public <T> LazyOptional<T> getCapability(Capability<T> cap, Direction side) {
-				// TODO Auto-generated method stub
-				return null;
-			}
-		});
+			CollarCapProvider cap = new CollarCapProvider((AnimalEntity) event.getObject());
+			event.addCapability(new ResourceLocation(MODID, "collar"), cap);
+			event.addListener(cap::invalidate);
+		}
 	}
 }

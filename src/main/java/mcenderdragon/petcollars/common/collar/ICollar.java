@@ -1,6 +1,5 @@
-package mcenderdragon.petcollars.common;
+package mcenderdragon.petcollars.common.collar;
 
-import mcenderdragon.petcollars.common.collar.AbstractPendantBase;
 import net.minecraft.entity.passive.AnimalEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundNBT;
@@ -11,9 +10,15 @@ public interface ICollar
 {
 	public void update();
 	
+	/**
+	 * This is fired from the {@link net.minecraftforge.event.entity.living.LivingAttackEvent} so before armor or any other buffs got applied to reduce the damage
+	 * 
+	 * @param src the Source where the Damage is coming from
+	 * @param rawDamage the raw damage amount
+	 */
 	public default void onAnimalAttackedBy(DamageSource src, float rawDamage)
 	{
-		AbstractPendantBase<INBTSerializable<CompoundNBT>>[] pendants  = gettAllPendants();
+		PendantBase<INBTSerializable<CompoundNBT>>[] pendants  = gettAllPendants();
 		AnimalEntity animalFromCollar = getAnimal();
 		INBTSerializable<CompoundNBT>[] additionalInfo = getAllAdditionalInfo();
 		for(int i=0;i<pendants.length;i++)
@@ -22,9 +27,15 @@ public interface ICollar
 		}
 	}
 	
+	/**
+	 * This is fired from the {@link net.minecraftforge.event.entity.living.LivingDamageEvent} so after armor or any other buffs got applied to reduce the damage
+	 * 
+	 * @param src the Source where the Damage is coming from
+	 * @param damage the raw damage amount
+	 */
 	public default void onAnimalDamagedBy(DamageSource src, float damage)
 	{
-		AbstractPendantBase<INBTSerializable<CompoundNBT>>[] pendants  = gettAllPendants();
+		PendantBase<INBTSerializable<CompoundNBT>>[] pendants  = gettAllPendants();
 		AnimalEntity animalFromCollar = getAnimal();
 		INBTSerializable<CompoundNBT>[] additionalInfo = getAllAdditionalInfo();
 		for(int i=0;i<pendants.length;i++)
@@ -35,9 +46,9 @@ public interface ICollar
 	
 	public ItemStack returnToItemStack();
 	
-	public AbstractPendantBase<INBTSerializable<CompoundNBT>>[] gettAllPendants();
+	public PendantBase<INBTSerializable<CompoundNBT>>[] gettAllPendants();
 	
-	public AbstractPendantBase<INBTSerializable<CompoundNBT>>[] getTickablePendants();
+	public PendantBase<INBTSerializable<CompoundNBT>>[] getTickablePendants();
 	
 	public INBTSerializable<CompoundNBT>[] getAllAdditionalInfo();
 	

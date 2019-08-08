@@ -1,12 +1,13 @@
 package mcenderdragon.petcollars.common.collar;
 
-import mcenderdragon.petcollars.common.ICollar;
 import net.minecraft.entity.passive.AnimalEntity;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.util.DamageSource;
+import net.minecraftforge.common.extensions.IForgeBlock;
 import net.minecraftforge.common.util.INBTSerializable;
+import net.minecraftforge.registries.ForgeRegistryEntry;
 
-public abstract class AbstractPendantBase<T extends INBTSerializable<CompoundNBT>> 
+public class PendantBase<T extends INBTSerializable<CompoundNBT>> extends ForgeRegistryEntry<PendantBase<?>> 
 {
 	/**
 	 * 
@@ -18,7 +19,7 @@ public abstract class AbstractPendantBase<T extends INBTSerializable<CompoundNBT
 	}
 	
 	/**
-	 * @return true if the {@link AbstractPendantBase#update(AnimalEntity)} method should be called.
+	 * @return true if the {@link PendantBase#update(AnimalEntity)} method should be called.
 	 */
 	public boolean needsUpdate()
 	{
@@ -41,7 +42,10 @@ public abstract class AbstractPendantBase<T extends INBTSerializable<CompoundNBT
 	 * @param nbt the saved nbt from the customInfo
 	 * @return a new instance of the customInfo
 	 */
-	public abstract T deserialize(CompoundNBT nbt);
+	public T deserialize(CompoundNBT nbt)
+	{
+		return (T) DummyAdditionalInfo.DUMMY;
+	}
 	
 	/**
 	 * This is fired from the {@link net.minecraftforge.event.entity.living.LivingAttackEvent} so before armor or any other buffs got applied to reduce the damage

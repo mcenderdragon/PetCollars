@@ -8,6 +8,7 @@ import mcenderdragon.petcollars.common.collar.CollarCapProvider;
 import mcenderdragon.petcollars.common.collar.DynamicCollarInstance;
 import mcenderdragon.petcollars.common.collar.ICollar;
 import mcenderdragon.petcollars.common.pendant.PendantBase;
+import mcenderdragon.petcollars.network.PacketHandler;
 import net.minecraft.block.Blocks;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.passive.AnimalEntity;
@@ -72,9 +73,7 @@ public class PetCollarsMain
         },
         () -> new DynamicCollarInstance(new INBTSerializable[0], new PendantBase[0], null, null));
 		
-        // some preinit code
-        LOGGER.info("HELLO FROM PREINIT");
-        LOGGER.info("DIRT BLOCK >> %s", Blocks.DIRT.getRegistryName());
+        PacketHandler.init();
     }
 	
 	@SubscribeEvent

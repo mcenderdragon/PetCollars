@@ -23,7 +23,7 @@ public interface ICollar extends IItemProvider
 	 */
 	public default void onAnimalAttackedBy(DamageSource src, float rawDamage)
 	{
-		PendantBase<INBTSerializable<CompoundNBT>>[] pendants  = gettAllPendants();
+		PendantBase<INBTSerializable<CompoundNBT>>[] pendants  = getAllPendants();
 		AnimalEntity animalFromCollar = getAnimal();
 		INBTSerializable<CompoundNBT>[] additionalInfo = getAllAdditionalInfo();
 		for(int i=0;i<pendants.length;i++)
@@ -41,7 +41,7 @@ public interface ICollar extends IItemProvider
 	 */
 	public default void onAnimalDamagedBy(DamageSource src, float damage)
 	{
-		PendantBase<INBTSerializable<CompoundNBT>>[] pendants  = gettAllPendants();
+		PendantBase<INBTSerializable<CompoundNBT>>[] pendants  = getAllPendants();
 		AnimalEntity animalFromCollar = getAnimal();
 		INBTSerializable<CompoundNBT>[] additionalInfo = getAllAdditionalInfo();
 		for(int i=0;i<pendants.length;i++)
@@ -51,7 +51,7 @@ public interface ICollar extends IItemProvider
 		}
 	}
 	
-	public PendantBase<INBTSerializable<CompoundNBT>>[] gettAllPendants();
+	public PendantBase<INBTSerializable<CompoundNBT>>[] getAllPendants();
 	
 	public PendantBase<INBTSerializable<CompoundNBT>>[] getTickablePendants();
 	

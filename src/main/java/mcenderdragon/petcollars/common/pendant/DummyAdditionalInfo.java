@@ -11,7 +11,7 @@ public class DummyAdditionalInfo implements INBTSerializable<CompoundNBT>
 	@Override
 	public CompoundNBT serializeNBT() 
 	{
-		return new CompoundNBT();
+		return null;
 	}
 
 	@Override

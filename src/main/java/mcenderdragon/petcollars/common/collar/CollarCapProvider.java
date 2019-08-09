@@ -66,7 +66,7 @@ public class CollarCapProvider implements ICapabilityProvider, INBTSerializable<
 				
 				nbt.putString("collar", col.asItem().getRegistryName().toString());
 				
-				PendantBase<INBTSerializable<CompoundNBT>>[] pendants = col.gettAllPendants();
+				PendantBase<INBTSerializable<CompoundNBT>>[] pendants = col.getAllPendants();
 				INBTSerializable<CompoundNBT>[] moreInfo = col.getAllAdditionalInfo();
 				
 				HelperCollars.saveToNBT(nbt, pendants, moreInfo);

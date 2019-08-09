@@ -86,7 +86,7 @@ public abstract class AbstractCollarInstance implements ICollar
 	}
 	
 	@Override
-	public PendantBase<INBTSerializable<CompoundNBT>>[] gettAllPendants() 
+	public PendantBase<INBTSerializable<CompoundNBT>>[] getAllPendants() 
 	{
 		return pendants;
 	}

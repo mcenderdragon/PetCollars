@@ -119,8 +119,11 @@ public class HelperCollars
 		PendantBase<INBTSerializable<CompoundNBT>>[] pb = new PendantBase[count];
 		for(int i=0;i<count;i++)
 		{
-			PendantBase<?> pendant = PendantRegistry.PENDANT_REGISTRY.getValue(new ResourceLocation(nbt.getString("p"+i)));
-			pb[i] = (PendantBase<INBTSerializable<CompoundNBT>>) pendant;
+			if(nbt.contains("p"+i))
+			{
+				PendantBase<?> pendant = PendantRegistry.PENDANT_REGISTRY.getValue(new ResourceLocation(nbt.getString("p"+i)));
+				pb[i] = (PendantBase<INBTSerializable<CompoundNBT>>) pendant;
+			}
 		}
 		
 		return pb;
@@ -133,8 +136,11 @@ public class HelperCollars
 		INBTSerializable<CompoundNBT>[] infos = new INBTSerializable[count];
 		for(int i=0;i<count;i++)
 		{
-			PendantBase<?> pendant = pendants[i];
-			infos[i] = pendant.deserialize(nbt.getCompound("i" + i));
+			if(nbt.contains("i"+i))
+			{
+				PendantBase<?> pendant = pendants[i];
+				infos[i] = pendant.deserialize(nbt.getCompound("i" + i));
+			}
 		}
 		return infos;
 	}

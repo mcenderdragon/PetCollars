@@ -57,8 +57,8 @@ public class ItemCollarBase extends Item
 		{
 			PendantBase<INBTSerializable<CompoundNBT>>[] pendants = new PendantBase[pendantAmount];
 			INBTSerializable<CompoundNBT>[] data = new INBTSerializable[pendantAmount];
-			Arrays.fill(pendants, PendantList.dummy);
-			Arrays.fill(data, pendants[0].deserialize(new CompoundNBT()));
+			Arrays.fill(pendants, null);
+			Arrays.fill(data, null);
 			
 			return new DynamicCollarInstance(data, pendants, animal, this);
 		}

@@ -56,7 +56,9 @@ public abstract class AbstractCollarInstance implements ICollar
 			ArrayList<Integer> poses = new ArrayList<>(pendants.length);
 			for(int i=0;i<pendants.length;i++)
 			{
-				if(pendants[i].needsUpdate())
+				if(pendants[i] == null)
+					continue;
+				else if(pendants[i].needsUpdate())
 				{
 					ticking.add(pendants[i]);
 					poses.add(i);

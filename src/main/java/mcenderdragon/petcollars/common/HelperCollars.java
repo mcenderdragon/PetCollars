@@ -149,8 +149,19 @@ public class HelperCollars
 		for(int i=0;i<pendants.length;i++)
 		{
 			PendantBase<INBTSerializable<CompoundNBT>> pb = pendants[i];
-			nbt.putString("p"+i, pb.getRegistryName().toString());
-			nbt.put("i"+i, moreInfo[i].serializeNBT());
+			if(pb!=null)
+			{
+				nbt.putString("p"+i, pb.getRegistryName().toString());
+				if(moreInfo[i]!=null)
+				{
+					CompoundNBT savedNBT = moreInfo[i].serializeNBT();
+					if(savedNBT!=null)
+					{
+						nbt.put("i"+i,savedNBT);
+					}
+				}
+			}
+			
 		}
 	}
 

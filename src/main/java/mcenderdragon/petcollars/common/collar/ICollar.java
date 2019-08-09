@@ -28,7 +28,8 @@ public interface ICollar extends IItemProvider
 		INBTSerializable<CompoundNBT>[] additionalInfo = getAllAdditionalInfo();
 		for(int i=0;i<pendants.length;i++)
 		{
-			pendants[i].onAnimalAttackedBy(animalFromCollar, src, rawDamage, this, additionalInfo[i]);
+			if(pendants[i]!=null)
+				pendants[i].onAnimalAttackedBy(animalFromCollar, src, rawDamage, this, additionalInfo[i]);
 		}
 	}
 	
@@ -45,7 +46,8 @@ public interface ICollar extends IItemProvider
 		INBTSerializable<CompoundNBT>[] additionalInfo = getAllAdditionalInfo();
 		for(int i=0;i<pendants.length;i++)
 		{
-			pendants[i].onAnimalDamagedBy(animalFromCollar, src, damage, this, additionalInfo[i]);
+			if(pendants[i]!=null)
+				pendants[i].onAnimalDamagedBy(animalFromCollar, src, damage, this, additionalInfo[i]);
 		}
 	}
 	

@@ -3,6 +3,8 @@ package mcenderdragon.petcollars.common;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import mcenderdragon.petcollars.client.CollarRenderManager;
+import mcenderdragon.petcollars.client.rendering.CollarRendererLayer;
 import mcenderdragon.petcollars.common.collar.AbstractCollarInstance;
 import mcenderdragon.petcollars.common.collar.CollarCapProvider;
 import mcenderdragon.petcollars.common.collar.DynamicCollarInstance;
@@ -10,6 +12,10 @@ import mcenderdragon.petcollars.common.collar.ICollar;
 import mcenderdragon.petcollars.common.pendant.PendantBase;
 import mcenderdragon.petcollars.network.PacketHandler;
 import net.minecraft.block.Blocks;
+import net.minecraft.client.renderer.entity.EntityRendererManager;
+import net.minecraft.client.renderer.entity.IEntityRenderer;
+import net.minecraft.client.renderer.entity.LivingRenderer;
+import net.minecraft.client.renderer.entity.model.EntityModel;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.passive.AnimalEntity;
 import net.minecraft.item.ItemStack;
@@ -32,6 +38,7 @@ import net.minecraftforge.energy.IEnergyStorage;
 import net.minecraftforge.event.AttachCapabilitiesEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 
@@ -49,6 +56,7 @@ public class PetCollarsMain
 	public PetCollarsMain()
 	{
 		FMLJavaModLoadingContext.get().getModEventBus().addListener(this::setup);
+		FMLJavaModLoadingContext.get().getModEventBus().addListener(this::clientSetup);
 		
 		MinecraftForge.EVENT_BUS.register(this);
 		
@@ -75,6 +83,20 @@ public class PetCollarsMain
 		
         PacketHandler.init();
     }
+	
+	private final void clientSetup(FMLClientSetupEvent event)
+	{
+		EntityRendererManager manager = event.getMinecraftSupplier().get().getRenderManager();
+		manager.renderers.forEach( (clazz,renderer) -> {
+			if(AnimalEntity.class.isAssignableFrom(clazz))
+			{
+				if(renderer instanceof LivingRenderer)
+				{
+					((LivingRenderer) renderer).addLayer(new CollarRendererLayer((LivingRenderer) renderer));
+				}
+			}
+		});
+	}
 	
 	@SubscribeEvent
 	public void attachCapabilitiesEvent(AttachCapabilitiesEvent<Entity> event)

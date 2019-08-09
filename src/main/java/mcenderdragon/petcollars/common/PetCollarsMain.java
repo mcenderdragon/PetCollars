@@ -7,6 +7,7 @@ import mcenderdragon.petcollars.common.collar.AbstractCollarInstance;
 import mcenderdragon.petcollars.common.collar.CollarCapProvider;
 import mcenderdragon.petcollars.common.collar.DynamicCollarInstance;
 import mcenderdragon.petcollars.common.collar.ICollar;
+import mcenderdragon.petcollars.common.pendant.PendantBase;
 import net.minecraft.block.Blocks;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.passive.AnimalEntity;
@@ -22,6 +23,7 @@ import net.minecraftforge.common.capabilities.CapabilityInject;
 import net.minecraftforge.common.capabilities.CapabilityManager;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
 import net.minecraftforge.common.capabilities.Capability.IStorage;
+import net.minecraftforge.common.util.INBTSerializable;
 import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.energy.CapabilityEnergy;
 import net.minecraftforge.energy.EnergyStorage;
@@ -68,7 +70,7 @@ public class PetCollarsMain
                
             }
         },
-        () -> new DynamicCollarInstance(new CompoundNBT(), null));
+        () -> new DynamicCollarInstance(new INBTSerializable[0], new PendantBase[0], null, null));
 		
         // some preinit code
         LOGGER.info("HELLO FROM PREINIT");

@@ -1,4 +1,4 @@
-package mcenderdragon.petcollars.common.collar;
+package mcenderdragon.petcollars.common.pendant;
 
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraftforge.common.util.INBTSerializable;
@@ -11,7 +11,7 @@ public class DummyAdditionalInfo implements INBTSerializable<CompoundNBT>
 	@Override
 	public CompoundNBT serializeNBT() 
 	{
-		return null;
+		return new CompoundNBT();
 	}
 
 	@Override

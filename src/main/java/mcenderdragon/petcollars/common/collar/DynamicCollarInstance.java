@@ -1,39 +1,27 @@
 package mcenderdragon.petcollars.common.collar;
 
+import mcenderdragon.petcollars.common.pendant.PendantBase;
 import net.minecraft.entity.passive.AnimalEntity;
-import net.minecraft.item.ItemStack;
+import net.minecraft.item.Item;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraftforge.common.util.INBTSerializable;
 
 public class DynamicCollarInstance extends AbstractCollarInstance 
 {
-
-	public DynamicCollarInstance(CompoundNBT savedNBT, AnimalEntity animalFromCollar) 
-	{
-		this(loadInfo(savedNBT), loadPendants(savedNBT), animalFromCollar);
-	}
+	private final Item collarItem;
 	
-	private static PendantBase<INBTSerializable<CompoundNBT>>[] loadPendants(CompoundNBT nbt)
-	{
-		return null;//TODO
-	}
-	
-	private static INBTSerializable<CompoundNBT>[] loadInfo(CompoundNBT nbt)
-	{
-		return null;//TODO
-	}
-	
-	public DynamicCollarInstance(INBTSerializable<CompoundNBT>[] additionalInfo, PendantBase<INBTSerializable<CompoundNBT>>[] pendants, AnimalEntity animalFromCollar) 
+	public DynamicCollarInstance(INBTSerializable<CompoundNBT>[] additionalInfo, PendantBase<INBTSerializable<CompoundNBT>>[] pendants, AnimalEntity animalFromCollar, Item collarItem) 
 	{
 		super(additionalInfo, pendants, animalFromCollar);
-		
+		this.collarItem = collarItem;
 	}
 
 	@Override
-	public ItemStack returnToItemStack() 
+	public Item asItem() 
 	{
-		// TODO Auto-generated method stub
-		return null;
+		return collarItem;
 	}
+
+	
 
 }

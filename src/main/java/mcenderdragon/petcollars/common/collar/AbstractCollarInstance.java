@@ -2,6 +2,7 @@ package mcenderdragon.petcollars.common.collar;
 
 import java.util.ArrayList;
 
+import mcenderdragon.petcollars.common.pendant.PendantBase;
 import net.minecraft.entity.passive.AnimalEntity;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraftforge.common.util.INBTSerializable;
@@ -46,6 +47,7 @@ public abstract class AbstractCollarInstance implements ICollar
 		}
 	}
 	
+	@SuppressWarnings("unchecked")
 	public PendantBase<INBTSerializable<CompoundNBT>>[] getTickablePendants()
 	{
 		if(needUpdates==null)

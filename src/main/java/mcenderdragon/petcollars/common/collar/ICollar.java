@@ -1,13 +1,18 @@
 package mcenderdragon.petcollars.common.collar;
 
+import mcenderdragon.petcollars.common.pendant.PendantBase;
 import net.minecraft.entity.passive.AnimalEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.util.DamageSource;
+import net.minecraft.util.IItemProvider;
 import net.minecraftforge.common.util.INBTSerializable;
 
-public interface ICollar 
+public interface ICollar extends IItemProvider
 {
+	/**
+	 * called each tick
+	 */
 	public void update();
 	
 	/**
@@ -44,13 +49,15 @@ public interface ICollar
 		}
 	}
 	
-	public ItemStack returnToItemStack();
-	
 	public PendantBase<INBTSerializable<CompoundNBT>>[] gettAllPendants();
 	
 	public PendantBase<INBTSerializable<CompoundNBT>>[] getTickablePendants();
 	
 	public INBTSerializable<CompoundNBT>[] getAllAdditionalInfo();
 	
+	/**
+	 * 
+	 * @return the ANimal wearing this collar
+	 */
 	public AnimalEntity getAnimal();
 }

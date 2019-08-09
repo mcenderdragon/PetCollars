@@ -1,14 +1,24 @@
-package mcenderdragon.petcollars.common.collar;
+package mcenderdragon.petcollars.common.pendant;
 
+import mcenderdragon.petcollars.common.PendantRegistry;
+import mcenderdragon.petcollars.common.collar.AbstractCollarInstance;
+import mcenderdragon.petcollars.common.collar.ICollar;
 import net.minecraft.entity.passive.AnimalEntity;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.util.DamageSource;
+import net.minecraft.util.Util;
+import net.minecraft.util.registry.Registry;
+import net.minecraft.util.text.ITextComponent;
+import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraftforge.common.extensions.IForgeBlock;
 import net.minecraftforge.common.util.INBTSerializable;
 import net.minecraftforge.registries.ForgeRegistryEntry;
 
-public class PendantBase<T extends INBTSerializable<CompoundNBT>> extends ForgeRegistryEntry<PendantBase<?>> 
+public abstract class PendantBase<T extends INBTSerializable<CompoundNBT>> extends ForgeRegistryEntry<PendantBase<?>> 
 {
+	
+	protected String translationKey;
+	
 	/**
 	 * 
 	 * @return time between update. 0 means every tick (so 20 per second). 1 means every second tick. numbers below 0 means disabled 
@@ -42,10 +52,7 @@ public class PendantBase<T extends INBTSerializable<CompoundNBT>> extends ForgeR
 	 * @param nbt the saved nbt from the customInfo
 	 * @return a new instance of the customInfo
 	 */
-	public T deserialize(CompoundNBT nbt)
-	{
-		return (T) DummyAdditionalInfo.DUMMY;
-	}
+	public abstract T deserialize(CompoundNBT nbt);
 	
 	/**
 	 * This is fired from the {@link net.minecraftforge.event.entity.living.LivingAttackEvent} so before armor or any other buffs got applied to reduce the damage
@@ -73,5 +80,27 @@ public class PendantBase<T extends INBTSerializable<CompoundNBT>> extends ForgeR
 	public void onAnimalDamagedBy(AnimalEntity animal, DamageSource src, float damage, ICollar collar, T customInfo)
 	{
 		
+	}
+	
+	/**
+	 * @return the color of the pendant on a collar
+	 */
+	public int getColor()
+	{
+		return 0xFF00FF;
+	}
+
+	public ITextComponent getName() 
+	{
+		return new TranslationTextComponent(getTranslationKey());
+	}
+
+	public String getTranslationKey() 
+	{
+		if(translationKey == null)
+		{
+			this.translationKey = Util.makeTranslationKey("pendant", PendantRegistry.PENDANT_REGISTRY.getKey(this));
+		}
+		return translationKey;
 	}
 }

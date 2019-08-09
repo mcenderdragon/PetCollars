@@ -2,7 +2,7 @@ package mcenderdragon.petcollars.common;
 
 import javax.annotation.Nullable;
 
-import mcenderdragon.petcollars.common.collar.PendantBase;
+import mcenderdragon.petcollars.common.pendant.PendantBase;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.registries.IForgeRegistry;
 import net.minecraftforge.registries.IForgeRegistryEntry;
@@ -15,7 +15,8 @@ public class PendantRegistry
 	public static final ResourceLocation PENDANTS_NAME = new ResourceLocation(PetCollarsMain.MODID, "pendants");
 	
 	// return new RegistryBuilder<T>().setName(name).setType(type).setMaxID(MAX_VARINT).addCallback(new NamespacedDefaultedWrapper.Factory<T>()).setDefaultKey(_default);
-	public static final IForgeRegistry<PendantBase<?>> PENDANTS = makeRegistry(PENDANTS_NAME, PendantBase.class).addCallback(PendantCallbacks.INSTANCE).create();
+	@SuppressWarnings("unchecked")
+	public static final IForgeRegistry<PendantBase<?>> PENDANT_REGISTRY = makeRegistry(PENDANTS_NAME, PendantBase.class).addCallback(PendantCallbacks.INSTANCE).create();
 	
 	private static <T extends IForgeRegistryEntry<T>> RegistryBuilder<T> makeRegistry(ResourceLocation name, Class<T> type)
     {
@@ -24,7 +25,7 @@ public class PendantRegistry
 	
 	public static void init()
 	{
-		PENDANTS.isEmpty();
+		PENDANT_REGISTRY.isEmpty();
 	}
 	
 	 private static class PendantCallbacks implements IForgeRegistry.AddCallback<PendantBase<?>>, IForgeRegistry.ClearCallback<PendantBase<?>>, IForgeRegistry.BakeCallback<PendantBase<?>>, IForgeRegistry.CreateCallback<PendantBase<?>>

@@ -2,6 +2,7 @@ package mcenderdragon.petcollars.client.rendering;
 
 import mcenderdragon.petcollars.client.CollarRenderHelper;
 import mcenderdragon.petcollars.client.CollarRenderHelper.ClientCollarState;
+import mcenderdragon.petcollars.client.CollarRenderManager;
 import net.minecraft.client.renderer.entity.IEntityRenderer;
 import net.minecraft.client.renderer.entity.layers.LayerRenderer;
 import net.minecraft.client.renderer.entity.model.EntityModel;
@@ -16,14 +17,18 @@ public class CollarRendererLayer extends LayerRenderer<AnimalEntity, EntityModel
 	}
 
 	@Override
-	public void render(AnimalEntity entityIn, float p_212842_2_, float p_212842_3_, float p_212842_4_, float p_212842_5_, float p_212842_6_, float p_212842_7_, float p_212842_8_) 
+	public void render(AnimalEntity entityIn, float limbSwing, float limbSwingAmount, float partialTicks, float ageInTicks, float netHeadYaw, float headPitch, float scaleIn) 
 	{
+		
 		ClientCollarState st = CollarRenderHelper.getCollarState(entityIn);
 		if(st == CollarRenderHelper.UNKNOWN)
 		{
 			System.out.println("Packet for " + entityIn + " has been send");
 		}
-			
+		else
+		{
+			CollarRenderManager.renderCollar(entityIn, st, partialTicks);
+		}
 		// TODO Auto-generated method stub
 		
 	}

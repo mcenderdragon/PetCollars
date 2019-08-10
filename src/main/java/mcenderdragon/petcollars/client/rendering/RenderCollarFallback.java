@@ -1,5 +1,7 @@
 package mcenderdragon.petcollars.client.rendering;
 
+import com.mojang.blaze3d.platform.GlStateManager;
+
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.ItemRenderer;
 import net.minecraft.client.renderer.entity.EntityRenderer;
@@ -27,10 +29,7 @@ public class RenderCollarFallback extends EntityRenderer<AnimalEntity>
 		
 	}
 
-	private void renderCollarAsItem(ItemStack collar, AnimalEntity animal)
-	{
-		Minecraft.getInstance().getItemRenderer().renderItem(collar, animal, ItemCameraTransforms.TransformType.GROUND, false);
-	}
+	
 	
 	@Override
 	protected ResourceLocation getEntityTexture(AnimalEntity entity) 

@@ -14,6 +14,7 @@ import mcenderdragon.petcollars.common.item.ItemCollarBase;
 import mcenderdragon.petcollars.common.pendant.PendantBase;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.passive.AnimalEntity;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.util.ResourceLocation;
@@ -177,5 +178,14 @@ public class HelperCollars
 		CollarCapProvider.addCollar(col, target);
 		
 		collaredEntities.add(new WeakReference<AnimalEntity>(target));
+	}
+	
+	public static ItemStack createCollarStack(Item collarItem, PendantBase<INBTSerializable<CompoundNBT>>[] pendants, INBTSerializable<CompoundNBT>[] moreInfo)
+	{
+		ItemStack stack = new ItemStack(collarItem);
+		CompoundNBT nbt = stack.getOrCreateChildTag("pendants");
+		HelperCollars.saveToNBT(nbt, pendants, moreInfo);
+		
+		return stack;
 	}
 }

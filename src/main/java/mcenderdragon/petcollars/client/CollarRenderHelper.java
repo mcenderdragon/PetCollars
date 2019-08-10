@@ -2,6 +2,8 @@ package mcenderdragon.petcollars.client;
 
 import java.util.WeakHashMap;
 
+import mcenderdragon.petcollars.common.HelperCollars;
+import mcenderdragon.petcollars.common.item.ItemCollarBase;
 import mcenderdragon.petcollars.common.pendant.PendantBase;
 import mcenderdragon.petcollars.network.MessageRequestCollarInfo;
 import mcenderdragon.petcollars.network.MessageResponseCollarInfo;
@@ -11,6 +13,7 @@ import net.minecraft.client.world.ClientWorld;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.passive.AnimalEntity;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraftforge.common.util.INBTSerializable;
 
@@ -58,6 +61,8 @@ public class CollarRenderHelper
 		final Item collarItem;
 		final PendantBase<INBTSerializable<CompoundNBT>>[] pendants;
 		
+		private ItemStack stack;
+		
 		public ClientCollarState(Item collarItem, PendantBase<INBTSerializable<CompoundNBT>>[] pendants) 
 		{
 			super();
@@ -93,6 +98,22 @@ public class CollarRenderHelper
 		public boolean isKnown()
 		{
 			return !isUnknown() && !isRequested();
+		}
+		
+		public ItemStack getAsItem()
+		{
+			if(stack ==  null)
+			{
+				if(hasCollar())
+				{
+					stack = HelperCollars.createCollarStack(collarItem, pendants, new INBTSerializable[pendants.length]);
+				}
+				else
+				{
+					stack = ItemStack.EMPTY;
+				}
+			}
+			return stack;
 		}
 	}
 }

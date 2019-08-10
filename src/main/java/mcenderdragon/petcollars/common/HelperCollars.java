@@ -12,6 +12,8 @@ import mcenderdragon.petcollars.common.collar.CollarCapProvider;
 import mcenderdragon.petcollars.common.collar.ICollar;
 import mcenderdragon.petcollars.common.item.ItemCollarBase;
 import mcenderdragon.petcollars.common.pendant.PendantBase;
+import mcenderdragon.petcollars.network.MessageResponseCollarInfo;
+import mcenderdragon.petcollars.network.PacketHandler;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.passive.AnimalEntity;
 import net.minecraft.item.Item;
@@ -27,6 +29,8 @@ import net.minecraftforge.fml.LogicalSide;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.gameevent.TickEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent.Phase;
+import net.minecraftforge.fml.network.PacketDistributor;
+import net.minecraftforge.fml.network.PacketDistributor.TargetPoint;
 
 @Mod.EventBusSubscriber(modid = PetCollarsMain.MODID)
 public class HelperCollars 
@@ -178,6 +182,8 @@ public class HelperCollars
 		CollarCapProvider.addCollar(col, target);
 		
 		collaredEntities.add(new WeakReference<AnimalEntity>(target));
+		
+		PacketHandler.CHANNEL_PET_COLLARS.send(PacketDistributor.NEAR.with(()-> new TargetPoint(target.posX, target.posY, target.posZ, 50F, target.getEntityWorld().dimension.getType())), new MessageResponseCollarInfo(target));
 	}
 	
 	public static ItemStack createCollarStack(Item collarItem, PendantBase<INBTSerializable<CompoundNBT>>[] pendants, INBTSerializable<CompoundNBT>[] moreInfo)

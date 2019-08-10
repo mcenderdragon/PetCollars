@@ -1,5 +1,7 @@
 package mcenderdragon.petcollars.common.pendant;
 
+import java.awt.Color;
+
 import mcenderdragon.petcollars.common.PendantRegistry;
 import mcenderdragon.petcollars.common.collar.AbstractCollarInstance;
 import mcenderdragon.petcollars.common.collar.ICollar;
@@ -87,7 +89,7 @@ public abstract class PendantBase<T extends INBTSerializable<CompoundNBT>> exten
 	 */
 	public int getColor()
 	{
-		return 0xFF00FF;
+		return Color.HSBtoRGB( System.currentTimeMillis()%1000 /1000F, 1F, 1F);
 	}
 
 	public ITextComponent getName() 

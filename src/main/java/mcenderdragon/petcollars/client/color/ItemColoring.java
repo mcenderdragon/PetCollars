@@ -30,18 +30,14 @@ public class ItemColoring
 			CompoundNBT nbt = stack.getChildTag("pendants");
 			if(nbt !=null)
 			{
-				if(!nbt.contains("color1"))
+				PendantBase<INBTSerializable<CompoundNBT>> pendant = HelperCollars.loadPendants(nbt)[0];
+				int color = 0;
+				if(pendant!=null)
 				{
-					PendantBase<INBTSerializable<CompoundNBT>> pendant = HelperCollars.loadPendants(nbt)[0];
-					int color = 0;
-					if(pendant!=null)
-					{
-						color = pendant.getColor();
-						nbt.putInt("color1", color);
-						return color;
-					}
+					color = pendant.getColor();
+					nbt.putInt("color1", color);
+					return color;
 				}
-				return nbt.getInt("color1");
 			}
 		}
 		return 0xFFFFFF;

@@ -53,4 +53,10 @@ public class FireResistancePendant extends PendantBase<CooldownInfo>
 		}
 		super.onAnimalAttackedBy(animal, src, rawDamage, collar, customInfo);
 	}
+	
+	@Override
+	public int getColor() 
+	{
+		return 0xff6600;
+	}
 }

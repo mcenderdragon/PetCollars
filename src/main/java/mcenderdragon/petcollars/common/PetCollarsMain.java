@@ -4,6 +4,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import mcenderdragon.petcollars.client.CollarRenderManager;
+import mcenderdragon.petcollars.client.color.ItemColoring;
 import mcenderdragon.petcollars.client.rendering.CollarRendererLayer;
 import mcenderdragon.petcollars.common.collar.AbstractCollarInstance;
 import mcenderdragon.petcollars.common.collar.CollarCapProvider;
@@ -96,6 +97,7 @@ public class PetCollarsMain
 				}
 			}
 		});
+		ItemColoring.setupColoring();
 	}
 	
 	@SubscribeEvent

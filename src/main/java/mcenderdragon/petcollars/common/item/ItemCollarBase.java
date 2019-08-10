@@ -14,12 +14,14 @@ import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.passive.AnimalEntity;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.item.IItemPropertyGetter;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.util.Hand;
 import net.minecraft.util.NonNullList;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraft.world.World;
@@ -33,6 +35,22 @@ public class ItemCollarBase extends Item
 	{
 		super(properties);
 		this.pendantAmount = pendantAmount;
+		this.addPropertyOverride(new ResourceLocation("pendant"), new IItemPropertyGetter()
+		{
+			@Override
+			public float call(ItemStack st, World w, LivingEntity living) 
+			{
+				CompoundNBT nbt = st.getChildTag("pendants");
+				if(nbt != null)
+				{
+					if(nbt.contains("p0"))
+					{
+						return 1;
+					}
+				}
+				return 0;
+			}
+		});
 	}
 
 	public ICollar createCollar(CompoundNBT nbt, AnimalEntity animal, PendantBase<INBTSerializable<CompoundNBT>>[] pendants, INBTSerializable<CompoundNBT>[] data)
@@ -103,9 +121,7 @@ public class ItemCollarBase extends Item
 					Arrays.fill(pendants, pendant);
 					Arrays.fill(data, pendants[0].deserialize(new CompoundNBT()));
 					 
-					ItemStack item = new ItemStack(this);
-					CompoundNBT nbt = item.getOrCreateChildTag("pendants");
-					HelperCollars.saveToNBT(nbt, pendants, data);
+					ItemStack item = HelperCollars.createCollarStack(this, pendants, data);
 					items.add(item);
 				}	
 			}

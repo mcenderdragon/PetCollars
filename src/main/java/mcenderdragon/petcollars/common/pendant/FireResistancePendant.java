@@ -12,6 +12,19 @@ import net.minecraft.world.ServerWorld;
 
 public class FireResistancePendant extends PendantBase<CooldownInfo>
 {
+	final int cooldown; //seconds - 30
+	final int color; //0xff6600
+	final int effectLength;//ticks - 50 = 2.5 seconds
+	
+	
+
+	public FireResistancePendant(int cooldown, int color, int effectLength) 
+	{
+		super();
+		this.cooldown = cooldown;
+		this.color = color;
+		this.effectLength = effectLength;
+	}
 
 	@Override
 	public CooldownInfo deserialize(CompoundNBT nbt) 
@@ -47,8 +60,8 @@ public class FireResistancePendant extends PendantBase<CooldownInfo>
 		{
 			if(customInfo.cooldown<=0)
 			{
-				customInfo.cooldown = 30; //30 seconds second cool down
-				animal.addPotionEffect(new EffectInstance(Effects.FIRE_RESISTANCE, 50)); //2.5 seconds
+				customInfo.cooldown = this.cooldown; //30 seconds second cool down
+				animal.addPotionEffect(new EffectInstance(Effects.FIRE_RESISTANCE, effectLength)); //2.5 seconds
 			}
 		}
 		super.onAnimalAttackedBy(animal, src, rawDamage, collar, customInfo);
@@ -57,6 +70,6 @@ public class FireResistancePendant extends PendantBase<CooldownInfo>
 	@Override
 	public int getColor() 
 	{
-		return 0xff6600;
+		return color;
 	}
 }

@@ -13,6 +13,7 @@ import mcenderdragon.petcollars.common.pendant.PendantList;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.passive.AnimalEntity;
+import net.minecraft.entity.passive.TameableEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.IItemPropertyGetter;
 import net.minecraft.item.Item;
@@ -93,6 +94,14 @@ public class ItemCollarBase extends Item
 			}
 			else if(target instanceof AnimalEntity)
 			{
+				if(target instanceof TameableEntity)
+				{
+					TameableEntity tame = (TameableEntity) target;
+					if(!tame.isTamed())
+					{
+						return false;
+					}
+				}
 				HelperCollars.attachCollar(stack, this, (AnimalEntity)target);
 				stack.shrink(1);
 				return true;

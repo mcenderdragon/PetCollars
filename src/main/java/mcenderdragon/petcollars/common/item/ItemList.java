@@ -13,9 +13,9 @@ public class ItemList
 	public static final Item leather_collar = new ItemCollarBase(new Item.Properties().group(ItemGroup.COMBAT).maxStackSize(1), 1).setRegistryName(PetCollarsMain.MODID, "leather_collar");
 	
 	public static final Item dummy_pendant = new ItemPendantBase(new Item.Properties().group(ItemGroup.COMBAT).rarity(Rarity.EPIC), PendantList.dummy).setRegistryName(PetCollarsMain.MODID, "dummy_pendant");
-	public static final Item heat_resistance_pendant = new ItemPendantBase(new Item.Properties().group(ItemGroup.COMBAT).rarity(Rarity.EPIC), PendantList.heat_resistance_pendant).setRegistryName(PetCollarsMain.MODID, "heat_resistance_pendant");
-	public static final Item fire_insensitive_pendant = new ItemPendantBase(new Item.Properties().group(ItemGroup.COMBAT).rarity(Rarity.EPIC), PendantList.fire_insensitive_pendant).setRegistryName(PetCollarsMain.MODID, "fire_insensitive_pendant");
-	public static final Item fire_resistance_pendant = new ItemPendantBase(new Item.Properties().group(ItemGroup.COMBAT).rarity(Rarity.EPIC), PendantList.fire_resistance_pendant).setRegistryName(PetCollarsMain.MODID, "fire_resistance_pendant");
+	public static final Item heat_resistance_pendant = new ItemPendantBase(new Item.Properties().group(ItemGroup.COMBAT).rarity(Rarity.COMMON), PendantList.heat_resistance_pendant).setRegistryName(PetCollarsMain.MODID, "heat_resistance_pendant");
+	public static final Item fire_insensitive_pendant = new ItemPendantBase(new Item.Properties().group(ItemGroup.COMBAT).rarity(Rarity.UNCOMMON), PendantList.fire_insensitive_pendant).setRegistryName(PetCollarsMain.MODID, "fire_insensitive_pendant");
+	public static final Item fire_resistance_pendant = new ItemPendantBase(new Item.Properties().group(ItemGroup.COMBAT).rarity(Rarity.RARE), PendantList.fire_resistance_pendant).setRegistryName(PetCollarsMain.MODID, "fire_resistance_pendant");
 	public static final Item fire_immunity_pendant = new ItemPendantBase(new Item.Properties().group(ItemGroup.COMBAT).rarity(Rarity.EPIC), PendantList.fire_immunity_pendant).setRegistryName(PetCollarsMain.MODID, "fire_immunity_pendant");
 	
 	

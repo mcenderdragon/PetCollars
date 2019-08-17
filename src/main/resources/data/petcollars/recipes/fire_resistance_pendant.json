@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "SWS",
+    "WLW",
+    "SWS"
+  ],
+  "key": {
+    "W": {
+      "item": "minecraft:magma_cream"
+    },
+    "S": {
+      "item": "minecraft:magma_block"
+    },
+    "L":{
+      "item": "petcollars:fire_insensitive_pendant"
+    }
+  },
+  "result": {
+    "item": "petcollars:fire_resistance_pendant",
+    "count": 1
+  }
+}

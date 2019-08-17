@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "SWS",
+    "WLW",
+    "SWS"
+  ],
+  "key": {
+    "W": {
+      "item": "minecraft:blaze_rod"
+    },
+    "S": {
+      "item": "minecraft:nether_bricks"
+    },
+    "L":{
+      "item": "petcollars:heat_resistance_pendant"
+    }
+  },
+  "result": {
+    "item": "petcollars:fire_insensitive_pendant",
+    "count": 1
+  }
+}

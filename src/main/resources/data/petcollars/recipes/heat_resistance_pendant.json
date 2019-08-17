@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "SWS",
+    "WLW",
+    "SWS"
+  ],
+  "key": {
+    "W": {
+      "item": "minecraft:water_bucket"
+    },
+    "S": {
+      "item": "minecraft:snow_block"
+    },
+    "L":{
+      "item": "minecraft:lapis_lazuli"
+    }
+  },
+  "result": {
+    "item": "petcollars:heat_resistance_pendant",
+    "count": 1
+  }
+}

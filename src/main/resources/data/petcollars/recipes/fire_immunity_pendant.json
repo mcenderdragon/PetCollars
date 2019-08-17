@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "SWS",
+    "WLW",
+    "SWS"
+  ],
+  "key": {
+    "W": {
+      "item": "minecraft:ghast_tear"
+    },
+    "S": {
+      "item": "minecraft:nether_wart_block"
+    },
+    "L":{
+      "item": "petcollars:fire_resistance_pendant"
+    }
+  },
+  "result": {
+    "item": "petcollars:fire_immunity_pendant",
+    "count": 1
+  }
+}

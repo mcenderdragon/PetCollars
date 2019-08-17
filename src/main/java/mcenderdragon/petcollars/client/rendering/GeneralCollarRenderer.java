@@ -7,13 +7,15 @@ import mcenderdragon.petcollars.client.ICollarRenderer;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.model.ItemCameraTransforms;
 import net.minecraft.entity.passive.AnimalEntity;
+import net.minecraft.entity.passive.PigEntity;
+import net.minecraft.entity.passive.SheepEntity;
 import net.minecraft.item.ItemStack;
 
 public class GeneralCollarRenderer implements ICollarRenderer<AnimalEntity> 
 {
 	private Class<? extends AnimalEntity> renderingClass;
-	private float dx,dy,dz;
-	private float scaleX,scaleY,scaleZ;
+	protected float dx,dy,dz;
+	protected float scaleX,scaleY,scaleZ;
 	
 	
 	public GeneralCollarRenderer(Class<? extends AnimalEntity> renderingClass, float dx, float dy, float dz, float scaleX, float scaleY, float scaleZ) 
@@ -32,6 +34,7 @@ public class GeneralCollarRenderer implements ICollarRenderer<AnimalEntity>
 	public void renderCollar(ClientCollarState collar, AnimalEntity animal, double x, double y, double z, float partialTicks)
 	{
 		GlStateManager.pushMatrix();
+
 		GlStateManager.translated(x+dx, y+dy, z+dz);
 		GlStateManager.scaled(scaleX, scaleY, scaleZ);
 		

@@ -1,15 +1,15 @@
 package mcenderdragon.petcollars.client;
 
 import java.util.WeakHashMap;
-import java.util.function.Supplier;
 import java.util.stream.Stream;
 
 import mcenderdragon.petcollars.client.rendering.CatCollarRenderer;
 import mcenderdragon.petcollars.client.rendering.GeneralCollarRenderer;
+import mcenderdragon.petcollars.client.rendering.HorseCollarRenderer;
+import mcenderdragon.petcollars.client.rendering.SheepCollarRenderer;
 import mcenderdragon.petcollars.client.rendering.WolfCollarRenderer;
 import mcenderdragon.petcollars.common.HelperCollars;
 import mcenderdragon.petcollars.common.PetCollarsMain;
-import mcenderdragon.petcollars.common.item.ItemCollarBase;
 import mcenderdragon.petcollars.common.pendant.PendantBase;
 import mcenderdragon.petcollars.network.MessageRequestCollarInfo;
 import mcenderdragon.petcollars.network.MessageResponseCollarInfo;
@@ -19,6 +19,7 @@ import net.minecraft.client.world.ClientWorld;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.passive.AnimalEntity;
 import net.minecraft.entity.passive.CowEntity;
+import net.minecraft.entity.passive.PigEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundNBT;
@@ -136,6 +137,11 @@ public class CollarRenderHelper
 		InterModComms.sendTo(PetCollarsMain.MODID, "rendering.custom_collar", WolfCollarRenderer::new);
 		InterModComms.sendTo(PetCollarsMain.MODID, "rendering.custom_collar", CatCollarRenderer::new);
 		
-		InterModComms.sendTo(PetCollarsMain.MODID, "rendering.custom_collar", () -> new GeneralCollarRenderer(CowEntity.class, 0F, -8F/16F, -9f/16F, 1.01F, 1.21F, 1.01F));
+		InterModComms.sendTo(PetCollarsMain.MODID, "rendering.custom_collar", () -> new GeneralCollarRenderer(CowEntity.class, 0F, -10F/16F, -8.5f/16F, 1.01F, 1.21F, 1.01F));
+		InterModComms.sendTo(PetCollarsMain.MODID, "rendering.custom_collar", () -> new GeneralCollarRenderer(PigEntity.class, 0F, -17.5F/16F, -8.5f/16F, 0.94F, 0.94F, 0.94F));
+		InterModComms.sendTo(PetCollarsMain.MODID, "rendering.custom_collar", SheepCollarRenderer::new);
+		InterModComms.sendTo(PetCollarsMain.MODID, "rendering.custom_collar", HorseCollarRenderer::new);
+		
+		
 	}
 }

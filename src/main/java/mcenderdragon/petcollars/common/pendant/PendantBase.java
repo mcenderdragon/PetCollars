@@ -5,6 +5,7 @@ import java.awt.Color;
 import mcenderdragon.petcollars.common.PendantRegistry;
 import mcenderdragon.petcollars.common.collar.AbstractCollarInstance;
 import mcenderdragon.petcollars.common.collar.ICollar;
+import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.passive.AnimalEntity;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.util.DamageSource;
@@ -104,5 +105,21 @@ public abstract class PendantBase<T extends INBTSerializable<CompoundNBT>> exten
 			this.translationKey = Util.makeTranslationKey("pendant", PendantRegistry.PENDANT_REGISTRY.getKey(this));
 		}
 		return translationKey;
+	}
+
+	/**
+	 * /**
+	 * This is fired from the {@link net.minecraftforge.event.entity.living.LivingDamageEvent} so after armor or any other buffs got applied to reduce the damage
+	 * 
+	 * @param target the living that this animal (wearing a collar) is attacking
+	 * @param amount the reduced damage dealt
+	 * @param source the damage source
+	 * @param animal The animal wearing this pendant
+	 * @param collar the collar this pedant is attached to.
+	 * @param customInfo additional information if needed
+	 */
+	public void onAnimalAttacking(AnimalEntity animal, LivingEntity target, float amount, DamageSource source, ICollar collar, T customInfo)
+	{
+		
 	}
 }

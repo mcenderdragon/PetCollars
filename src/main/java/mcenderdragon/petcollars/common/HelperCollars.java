@@ -80,6 +80,13 @@ public class HelperCollars
 			if(collar!=null)
 				collar.onAnimalDamagedBy(event.getSource(), event.getAmount());
 		}
+		Entity attacker = event.getSource().getTrueSource();
+		if(attacker!=null && hasCollar(attacker))
+		{
+			ICollar collar = getCollarFromEntity((AnimalEntity) attacker);
+			if(collar != null)
+				collar.onAnimalAttacking(event.getEntityLiving(), event.getAmount(), event.getSource());
+		}
 	}
 	
 	@SubscribeEvent

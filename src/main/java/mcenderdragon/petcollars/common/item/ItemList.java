@@ -17,6 +17,7 @@ public class ItemList
 	public static final Item fire_insensitive_pendant = new ItemPendantBase(new Item.Properties().group(ItemGroup.COMBAT).rarity(Rarity.UNCOMMON), PendantList.fire_insensitive_pendant).setRegistryName(PetCollarsMain.MODID, "fire_insensitive_pendant");
 	public static final Item fire_resistance_pendant = new ItemPendantBase(new Item.Properties().group(ItemGroup.COMBAT).rarity(Rarity.RARE), PendantList.fire_resistance_pendant).setRegistryName(PetCollarsMain.MODID, "fire_resistance_pendant");
 	public static final Item fire_immunity_pendant = new ItemPendantBase(new Item.Properties().group(ItemGroup.COMBAT).rarity(Rarity.EPIC), PendantList.fire_immunity_pendant).setRegistryName(PetCollarsMain.MODID, "fire_immunity_pendant");
+	public static final Item improvement_pendant = new ItemPendantBase(new Item.Properties().group(ItemGroup.COMBAT).rarity(Rarity.COMMON), PendantList.improvement_pendant).setRegistryName(PetCollarsMain.MODID, "improvement_pendant");
 	
 	
 	public static void init(Consumer<Item> register)
@@ -27,5 +28,6 @@ public class ItemList
 		register.accept(fire_insensitive_pendant);
 		register.accept(fire_resistance_pendant);
 		register.accept(fire_immunity_pendant);
+		register.accept(improvement_pendant);
 	}
 }

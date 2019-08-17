@@ -11,7 +11,7 @@ public class PendantList
 	public static final PendantBase<?> fire_insensitive_pendant = new FireResistancePendant(30, 0xE63B0B, 50).setRegistryName(PetCollarsMain.MODID, "fire_insensitive_pendant");
 	public static final PendantBase<?> fire_resistance_pendant = new FireResistancePendant(20, 0xD12111, 75).setRegistryName(PetCollarsMain.MODID, "fire_resistance_pendant");
 	public static final PendantBase<?> fire_immunity_pendant = new FireResistancePendant(6, 0xFF0000, 125).setRegistryName(PetCollarsMain.MODID, "fire_immunity_pendant");
-	
+	public static final PendantBase<?> improvement_pendant = new ImprovementPendant().setRegistryName(PetCollarsMain.MODID, "improvement_pendant");
 	
 	public static void init(Consumer<PendantBase<?>> register)
 	{
@@ -20,5 +20,6 @@ public class PendantList
 		register.accept(fire_insensitive_pendant);
 		register.accept(fire_resistance_pendant);
 		register.accept(fire_immunity_pendant);
+		register.accept(improvement_pendant);
 	}
 }

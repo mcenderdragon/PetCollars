@@ -4,6 +4,7 @@ import java.util.function.Consumer;
 
 import mcenderdragon.petcollars.common.PetCollarsMain;
 import mcenderdragon.petcollars.common.pendant.PendantList;
+import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.Rarity;
@@ -29,5 +30,7 @@ public class ItemList
 		register.accept(fire_resistance_pendant);
 		register.accept(fire_immunity_pendant);
 		register.accept(improvement_pendant);
+		
+		register.accept(new BlockItem(PetCollarsMain.collar_crafter, new Item.Properties().group(ItemGroup.REDSTONE)).setRegistryName(PetCollarsMain.collar_crafter.getRegistryName()));
 	}
 }

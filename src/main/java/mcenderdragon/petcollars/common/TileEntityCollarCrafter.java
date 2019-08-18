@@ -16,11 +16,25 @@ import net.minecraftforge.items.ItemStackHandler;
 public class TileEntityCollarCrafter extends TileEntity 
 {
 
-	ItemStackHandler handler = new ItemStackHandler(6);
+	ItemStackHandler handler = new ItemStackHandlerImpl();
 	
 	public TileEntityCollarCrafter() 
 	{
-		super(type);
+		super(PetCollarsMain.type_collar_crafter);
+	}
+	
+	@Override
+	public void read(CompoundNBT compound) 
+	{
+		super.read(compound);
+		handler.deserializeNBT(compound.getCompound("items"));
+	}
+	
+	@Override
+	public CompoundNBT write(CompoundNBT compound) 
+	{
+		compound.put("items", handler.serializeNBT());
+		return super.write(compound);
 	}
 
 	public boolean tryCraft()
@@ -83,6 +97,31 @@ public class TileEntityCollarCrafter extends TileEntity
 			}
 		}
 		
+		@Override
+		public int getSlotLimit(int slot) 
+		{
+			return 1;
+		}
+		
+	}
+
+	public ItemStack addItem(ItemStack heldItem) 
+	{
+		if(handler.getStackInSlot(0).isEmpty())
+		{
+			return handler.insertItem(0, heldItem, false);
+		}
+		else
+		{
+			ItemCollarBase collar = (ItemCollarBase) handler.getStackInSlot(0).getItem();
+			for(int i=0;i<collar.pendantAmount;i++)
+			{
+				ItemStack inserted = handler.insertItem(i+1, heldItem, false);
+				if(inserted!=heldItem)
+					return inserted;
+			}
+			return heldItem;
+		}
 		
 	}
 }

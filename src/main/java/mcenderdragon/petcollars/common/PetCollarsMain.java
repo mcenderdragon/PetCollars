@@ -3,6 +3,9 @@ package mcenderdragon.petcollars.common;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import com.google.common.collect.ImmutableSet;
+import com.google.common.collect.Sets;
+
 import mcenderdragon.petcollars.client.CollarRenderHelper;
 import mcenderdragon.petcollars.client.color.ItemColoring;
 import mcenderdragon.petcollars.client.rendering.CollarRendererLayer;
@@ -11,11 +14,15 @@ import mcenderdragon.petcollars.common.collar.DynamicCollarInstance;
 import mcenderdragon.petcollars.common.collar.ICollar;
 import mcenderdragon.petcollars.common.pendant.PendantBase;
 import mcenderdragon.petcollars.network.PacketHandler;
+import net.minecraft.block.Block;
+import net.minecraft.block.material.Material;
+import net.minecraft.block.material.MaterialColor;
 import net.minecraft.client.renderer.entity.EntityRendererManager;
 import net.minecraft.client.renderer.entity.LivingRenderer;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.passive.AnimalEntity;
 import net.minecraft.nbt.INBT;
+import net.minecraft.tileentity.TileEntityType;
 import net.minecraft.util.Direction;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.api.distmarker.Dist;
@@ -26,9 +33,10 @@ import net.minecraftforge.common.capabilities.CapabilityInject;
 import net.minecraftforge.common.capabilities.CapabilityManager;
 import net.minecraftforge.common.util.INBTSerializable;
 import net.minecraftforge.event.AttachCapabilitiesEvent;
+import net.minecraftforge.event.RegistryEvent;
+import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.DistExecutor;
-import net.minecraftforge.fml.InterModComms;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
@@ -47,12 +55,20 @@ public class PetCollarsMain
     @CapabilityInject(ICollar.class)
     public static Capability<ICollar> COLLAR = null;
     
+    public static TileEntityType<TileEntityCollarCrafter> type_collar_crafter;
+    public static Block collar_crafter;
+    
 	public PetCollarsMain()
 	{
-		FMLJavaModLoadingContext.get().getModEventBus().addListener(this::setup);
-		FMLJavaModLoadingContext.get().getModEventBus().addListener(this::clientSetup);
-		FMLJavaModLoadingContext.get().getModEventBus().addListener(this::sendIMC);
-		FMLJavaModLoadingContext.get().getModEventBus().addListener(this::collectIMC);
+		IEventBus modBus = FMLJavaModLoadingContext.get().getModEventBus();
+		
+		modBus.addListener(this::setup);
+		modBus.addListener(this::clientSetup);
+		modBus.addListener(this::sendIMC);
+		modBus.addListener(this::collectIMC);
+		
+		modBus.addGenericListener(Block.class, this::registerBlocks);
+		modBus.addGenericListener(TileEntityType.class, this::registerTileEntityType);
 		
 		MinecraftForge.EVENT_BUS.register(this);
 		
@@ -103,6 +119,20 @@ public class PetCollarsMain
 	private final void collectIMC(InterModProcessEvent event)
 	{
 		DistExecutor.runWhenOn(Dist.CLIENT, () -> () -> CollarRenderHelper.processIMCs(event.getIMCStream(s -> s.startsWith("rendering"))));
+	}
+	
+	public void registerBlocks(RegistryEvent.Register<Block> event)
+	{
+		collar_crafter = new BlockCollarCrafter(Block.Properties.create(Material.ROCK, MaterialColor.BLACK));
+		collar_crafter.setRegistryName(MODID, "collar_crafter");
+		event.getRegistry().register(collar_crafter);
+	}
+	
+	public void registerTileEntityType(RegistryEvent.Register<TileEntityType<?>> event)
+	{
+		type_collar_crafter = new TileEntityType<TileEntityCollarCrafter>(TileEntityCollarCrafter::new, ImmutableSet.of(collar_crafter), null);
+		type_collar_crafter.setRegistryName(MODID, "collar_crafter");
+		event.getRegistry().register(type_collar_crafter);
 	}
 	
 	@SubscribeEvent

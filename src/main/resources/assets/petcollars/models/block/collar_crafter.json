@@ -1,9 +1,9 @@
 {   "parent": "block/block",
     "textures": {
-        "particle": "petcollars:block/collar_stone",
-        "bottom": "petcollars:block/collar_stone",
-        "top": "petcollars:block/collar_stone_top",
-        "side": "petcollars:block/collar_stone"
+        "particle": "petcollars:blocks/collar_stone",
+        "bottom": "petcollars:blocks/collar_stone",
+        "top": "petcollars:blocks/collar_stone_top",
+        "side": "petcollars:blocks/collar_stone"
     },
     "elements": [
         {   "from": [ 0, 0, 0 ],

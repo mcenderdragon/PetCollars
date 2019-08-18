@@ -1,16 +1,20 @@
 package mcenderdragon.petcollars.common;
 
-import java.util.Arrays;
-
 import mcenderdragon.petcollars.common.item.ItemCollarBase;
 import mcenderdragon.petcollars.common.item.ItemPendantBase;
 import mcenderdragon.petcollars.common.pendant.PendantBase;
 import net.minecraft.entity.item.ItemEntity;
+import net.minecraft.entity.player.PlayerModelPart;
+import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundNBT;
+import net.minecraft.network.IPacket;
+import net.minecraft.network.NetworkManager;
+import net.minecraft.network.play.server.SUpdateTileEntityPacket;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.tileentity.TileEntityType;
+import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraftforge.common.util.INBTSerializable;
+import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.ItemStackHandler;
 
 public class TileEntityCollarCrafter extends TileEntity 
@@ -36,7 +40,33 @@ public class TileEntityCollarCrafter extends TileEntity
 		compound.put("items", handler.serializeNBT());
 		return super.write(compound);
 	}
+	
+	@Override
+	public CompoundNBT getUpdateTag() 
+	{
+		return write(new CompoundNBT());
+	}
+	
+	@Override
+	public void handleUpdateTag(CompoundNBT tag) 
+	{
+		super.handleUpdateTag(tag);
+	}
 
+	@Override
+	public SUpdateTileEntityPacket getUpdatePacket() 
+	{
+		return new SUpdateTileEntityPacket(pos, 0, getUpdateTag());
+	}
+	
+	@Override
+	public void onDataPacket(NetworkManager net, SUpdateTileEntityPacket pkt) 
+	{
+		handleUpdateTag(pkt.getNbtCompound());
+		super.onDataPacket(net, pkt);
+	}
+	
+	@SuppressWarnings("unchecked")
 	public boolean tryCraft()
 	{
 		if(!handler.getStackInSlot(0).isEmpty())
@@ -72,6 +102,7 @@ public class TileEntityCollarCrafter extends TileEntity
 			ItemEntity entity = new ItemEntity(world, pos.getX()+0.5, pos.getY()+1, pos.getZ()+0.5, item);
 			world.addEntity(entity);
 			
+			markDirty();
 			return true;
 		}
 		return false;
@@ -89,7 +120,14 @@ public class TileEntityCollarCrafter extends TileEntity
 		{
 			if(slot == 0)
 			{
-				return stack.getItem() instanceof ItemCollarBase;
+				if(stack.getItem() instanceof ItemCollarBase)
+				{
+					return !stack.hasTag();
+				}
+				else
+				{
+					return false;
+				}
 			}
 			else
 			{
@@ -109,7 +147,9 @@ public class TileEntityCollarCrafter extends TileEntity
 	{
 		if(handler.getStackInSlot(0).isEmpty())
 		{
-			return handler.insertItem(0, heldItem, false);
+			ItemStack is = handler.insertItem(0, heldItem, false);
+			markDirty();
+			return is;
 		}
 		else
 		{
@@ -118,10 +158,26 @@ public class TileEntityCollarCrafter extends TileEntity
 			{
 				ItemStack inserted = handler.insertItem(i+1, heldItem, false);
 				if(inserted!=heldItem)
+				{
+					markDirty();
 					return inserted;
+				}
 			}
 			return heldItem;
 		}
 		
+	}
+
+	public IItemHandler getHandler() 
+	{
+		return handler;
+	}
+	
+	@Override
+	public void markDirty() 
+	{
+		super.markDirty();
+		SUpdateTileEntityPacket pkt = this.getUpdatePacket();
+		world.getEntitiesWithinAABB(ServerPlayerEntity.class, new AxisAlignedBB(pos, pos.add(1, 1, 1)).grow(25)).stream().map(p -> p.connection).forEach(c -> c.sendPacket(pkt));
 	}
 }

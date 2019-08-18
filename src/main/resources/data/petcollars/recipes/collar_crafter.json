@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "SSS",
+    "SPS"
+  ],
+  "key": {
+    "S": {
+      "item": "minecraft:andesite"
+    },
+    "P": {
+      "tag": "forge:dyes/purple"
+    }
+  },
+  "result": {
+    "item": "petcollars:collar_crafter",
+    "count": 1
+  }
+}

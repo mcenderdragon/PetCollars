@@ -9,6 +9,7 @@ import com.google.common.collect.Sets;
 import mcenderdragon.petcollars.client.CollarRenderHelper;
 import mcenderdragon.petcollars.client.color.ItemColoring;
 import mcenderdragon.petcollars.client.rendering.CollarRendererLayer;
+import mcenderdragon.petcollars.client.rendering.TileCollarCrafterRenderer;
 import mcenderdragon.petcollars.common.collar.CollarCapProvider;
 import mcenderdragon.petcollars.common.collar.DynamicCollarInstance;
 import mcenderdragon.petcollars.common.collar.ICollar;
@@ -17,8 +18,10 @@ import mcenderdragon.petcollars.network.PacketHandler;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.material.MaterialColor;
+import net.minecraft.client.renderer.RenderHelper;
 import net.minecraft.client.renderer.entity.EntityRendererManager;
 import net.minecraft.client.renderer.entity.LivingRenderer;
+import net.minecraft.client.renderer.entity.model.RendererModel;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.passive.AnimalEntity;
 import net.minecraft.nbt.INBT;
@@ -37,7 +40,9 @@ import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.DistExecutor;
+import net.minecraftforge.fml.client.registry.ClientRegistry;
 import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.InterModEnqueueEvent;
@@ -109,6 +114,8 @@ public class PetCollarsMain
 			}
 		});
 		ItemColoring.setupColoring();
+		
+		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityCollarCrafter.class, new TileCollarCrafterRenderer());
 	}
 	
 	private final void sendIMC(InterModEnqueueEvent event)

@@ -22,6 +22,6 @@ public class BlockCollarCrafter extends HorizontalBlock
 	@Override
 	public TileEntity createTileEntity(BlockState state, IBlockReader world) 
 	{
-		return new TileEntityCollarCrafter;
+		return new TileEntityCollarCrafter();
 	}
 }

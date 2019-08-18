@@ -2,6 +2,9 @@ package mcenderdragon.petcollars.common.item;
 
 import mcenderdragon.petcollars.common.pendant.PendantBase;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.CompoundNBT;
+import net.minecraftforge.common.util.INBTSerializable;
 
 public class ItemPendantBase extends Item 
 {
@@ -13,8 +16,13 @@ public class ItemPendantBase extends Item
 		this.pendant = pendant;
 	}
 
-	public PendantBase<?> getPendant()
+	public PendantBase<?> getPendant(ItemStack it)
 	{
 		return pendant;
+	}
+	
+	public INBTSerializable<CompoundNBT> createAdditionalInfo(ItemStack it)
+	{
+		return pendant.deserialize(it.getOrCreateChildTag("pendant"));
 	}
 }

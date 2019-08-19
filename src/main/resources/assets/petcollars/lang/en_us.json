@@ -1,0 +1,13 @@
+{
+	"block.petcollars.collar_crafter": "Collar Crafter",
+	
+	"item.collar.pendants": "Pendants:",
+	
+	"item.petcollars.leather_collar": "Leather Collar",
+	"item.petcollars.dummy_pendant": "Dummy Pendant",
+	"item.petcollars.heat_resistance_pendant": "Heat Resistance Pendant",
+	"item.petcollars.fire_insensitive_pendant": "Fire Insensitive Pendant",
+	"item.petcollars.fire_resistance_pendant": "Fire Resistance Pendant",
+	"item.petcollars.fire_immunity_pendant": "Fire Immunity Pendant",
+	"item.petcollars.improvement_pendant": "Improvement Pendant"
+}

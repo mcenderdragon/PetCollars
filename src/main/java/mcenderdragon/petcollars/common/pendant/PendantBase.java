@@ -102,7 +102,7 @@ public abstract class PendantBase<T extends INBTSerializable<CompoundNBT>> exten
 	{
 		if(translationKey == null)
 		{
-			this.translationKey = Util.makeTranslationKey("pendant", PendantRegistry.PENDANT_REGISTRY.getKey(this));
+			this.translationKey = Util.makeTranslationKey("item", PendantRegistry.PENDANT_REGISTRY.getKey(this));
 		}
 		return translationKey;
 	}

@@ -1,5 +1,8 @@
 {
     "variants": {
-        "": { "model": "petcollars:block/collar_crafter" }
+        "facing=north": { "model": "petcollars:block/collar_crafter" },
+        "facing=east": { "model": "petcollars:block/collar_crafter" , "y":90},
+        "facing=south": { "model": "petcollars:block/collar_crafter" , "y":180},
+        "facing=west": { "model": "petcollars:block/collar_crafter" , "y":270}
     }
 }

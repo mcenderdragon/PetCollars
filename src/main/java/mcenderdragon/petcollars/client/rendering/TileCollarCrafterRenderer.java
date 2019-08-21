@@ -3,6 +3,7 @@ package mcenderdragon.petcollars.client.rendering;
 import com.mojang.blaze3d.platform.GlStateManager;
 
 import mcenderdragon.petcollars.common.TileEntityCollarCrafter;
+import net.minecraft.block.HorizontalBlock;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.ItemRenderer;
 import net.minecraft.client.renderer.model.ItemCameraTransforms;
@@ -10,6 +11,7 @@ import net.minecraft.client.renderer.tileentity.TileEntityRenderer;
 import net.minecraft.entity.EntityType;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
+import net.minecraft.util.Direction;
 import net.minecraftforge.items.IItemHandler;
 
 public class TileCollarCrafterRenderer extends TileEntityRenderer<TileEntityCollarCrafter> 
@@ -21,9 +23,28 @@ public class TileCollarCrafterRenderer extends TileEntityRenderer<TileEntityColl
 		GlStateManager.translated(x+0.5, y+12.1/16F, z+0.5);
 		IItemHandler handler = tileEntityIn.getHandler();
 		
+		Direction face = tileEntityIn.getBlockState().get(HorizontalBlock.HORIZONTAL_FACING);
+		switch (face)
+		{
+		case SOUTH:
+			GlStateManager.rotatef(180F, 0, 1, 0);
+			break;
+		case WEST:
+			GlStateManager.rotatef(90F, 0, 1, 0);
+			break;
+		case EAST:
+			GlStateManager.rotatef(-90F, 0, 1, 0);
+			break;
+		default:
+			break;
+		}
+		
 //		GlStateManager.enableCull();
 		GlStateManager.rotatef(-90F, 1F, 0, 0);
 		GlStateManager.scalef(0.25F, 0.25F, 0.25F);
+		
+		
+		
 		for(int i=0;i<handler.getSlots();i++)
 		{
 			GlStateManager.pushMatrix();

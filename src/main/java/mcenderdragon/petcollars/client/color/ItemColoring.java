@@ -20,22 +20,21 @@ public class ItemColoring
 		ItemColors itemC = Minecraft.getInstance().getItemColors();
 		BlockColors blockC = Minecraft.getInstance().getBlockColors();
 		
-		itemC.register(ItemColoring::getColorFromCollar, ItemList.leather_collar);
+		itemC.register(ItemColoring::getColorFromCollar, ItemList.leather_collar, ItemList.gold_collar);
 	}
 		
 	public static int getColorFromCollar(ItemStack stack, int layer)
 	{
-		if(layer == 1)
+		if(layer == 1 || layer == 2)
 		{
 			CompoundNBT nbt = stack.getChildTag("pendants");
 			if(nbt !=null)
 			{
-				PendantBase<INBTSerializable<CompoundNBT>> pendant = HelperCollars.loadPendants(nbt)[0];
+				PendantBase<INBTSerializable<CompoundNBT>> pendant = HelperCollars.loadPendants(nbt)[layer -1];
 				int color = 0;
 				if(pendant!=null)
 				{
 					color = pendant.getColor();
-					nbt.putInt("color1", color);
 					return color;
 				}
 			}

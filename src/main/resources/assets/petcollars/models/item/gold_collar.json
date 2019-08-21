@@ -1,0 +1,14 @@
+{
+    "parent": "item/generated",
+    "textures": {
+        "layer0": "petcollars:items/gold_collar"
+    },
+	"overrides": [
+        {
+            "predicate": {
+                "pendant": 1
+            },
+            "model": "petcollars:item/gold_collar_pendant"
+        }
+	]
+}

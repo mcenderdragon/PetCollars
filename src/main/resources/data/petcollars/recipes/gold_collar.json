@@ -3,7 +3,7 @@
   "pattern": [
     " I ",
     "L L",
-    "LLL"
+    "LGL"
   ],
   "key": {
     "L": {
@@ -11,10 +11,13 @@
     },
     "I": {
       "tag": "forge:ingots/iron"
+    },
+    "G": {
+      "tag": "forge:ingots/gold"
     }
   },
   "result": {
-    "item": "petcollars:leather_collar",
+    "item": "petcollars:gold_collar",
     "count": 1
   }
 }

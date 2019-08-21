@@ -11,6 +11,8 @@ import net.minecraft.item.Rarity;
 
 public class ItemList
 {
+	public static final Item plier = new ItemPlier(new Item.Properties().group(ItemGroup.TOOLS).maxStackSize(1)).setRegistryName(PetCollarsMain.MODID, "plier");
+	
 	public static final Item leather_collar = new ItemCollarBase(new Item.Properties().group(ItemGroup.COMBAT).maxStackSize(1), 1).setRegistryName(PetCollarsMain.MODID, "leather_collar");
 	
 	public static final Item dummy_pendant = new ItemPendantBase(new Item.Properties().group(ItemGroup.COMBAT).rarity(Rarity.EPIC), PendantList.dummy).setRegistryName(PetCollarsMain.MODID, "dummy_pendant");
@@ -23,6 +25,7 @@ public class ItemList
 	
 	public static void init(Consumer<Item> register)
 	{
+		register.accept(plier);
 		register.accept(leather_collar);
 		register.accept(dummy_pendant);
 		register.accept(heat_resistance_pendant);

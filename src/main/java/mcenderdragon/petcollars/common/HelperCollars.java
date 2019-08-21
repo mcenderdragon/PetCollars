@@ -201,4 +201,9 @@ public class HelperCollars
 		
 		return stack;
 	}
+	
+	public static ItemStack createCollarStack(ICollar collar)
+	{
+		return createCollarStack(collar.asItem(), collar.getAllPendants(), collar.getAllAdditionalInfo());
+	}
 }

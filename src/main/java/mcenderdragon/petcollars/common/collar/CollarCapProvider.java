@@ -117,6 +117,19 @@ public class CollarCapProvider implements ICapabilityProvider, INBTSerializable<
 		}
 	}
 	
+	private ICollar remove()
+	{
+		if(deserializedInstance==null)
+			throw new IllegalArgumentException("Entity has no collar");
+		else
+		{
+			ICollar c = deserializedInstance;
+			invalidate();
+			deserializedInstance = null;
+			return c;
+		}
+	}
+	
 	public void invalidate() 
 	{
 		if(opt!=null)
@@ -129,6 +142,19 @@ public class CollarCapProvider implements ICapabilityProvider, INBTSerializable<
 		if(provider!=null)
 		{
 			provider.initCollar(collar);
+		}
+	}
+	
+	public static ICollar removeCollar(AnimalEntity animal)
+	{
+		CollarCapProvider provider = animalProviderMap.get(animal);
+		if(provider!=null)
+		{
+			return provider.remove();
+		}
+		else
+		{
+			return null;
 		}
 	}
 }

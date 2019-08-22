@@ -1,5 +1,5 @@
 modLoader="javafml"
-loaderVersion="[27,)" #mandatory 27 = 1.14.3, 28 = 1.14.4
+loaderVersion="[28,)" #mandatory 27 = 1.14.3, 28 = 1.14.4
 issueTrackerURL="https://github.com/mcenderdragon/PetCollars/issues"
 [[mods]]
 modId="petcollars"
@@ -16,12 +16,12 @@ WIth this mod you can add a collar with custom pendants to any animal.
 [[dependencies.petcollars]] #optional
     modId="forge"
     mandatory=true
-    versionRange="[27,)" 
+    versionRange="[28,)" 
     ordering="NONE"
     side="BOTH"
 [[dependencies.petcollars]]
     modId="minecraft"
     mandatory=true
-    versionRange="[1.14.3]"
+    versionRange="[1.14.4]"
     ordering="NONE"
     side="BOTH"

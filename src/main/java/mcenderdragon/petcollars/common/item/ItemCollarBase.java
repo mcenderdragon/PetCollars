@@ -7,7 +7,6 @@ import mcenderdragon.petcollars.common.HelperCollars;
 import mcenderdragon.petcollars.common.PendantRegistry;
 import mcenderdragon.petcollars.common.collar.DynamicCollarInstance;
 import mcenderdragon.petcollars.common.collar.ICollar;
-import mcenderdragon.petcollars.common.pendant.DummyAdditionalInfo;
 import mcenderdragon.petcollars.common.pendant.PendantBase;
 import mcenderdragon.petcollars.common.pendant.PendantList;
 import net.minecraft.client.util.ITooltipFlag;

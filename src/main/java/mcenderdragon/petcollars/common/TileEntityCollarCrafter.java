@@ -1,18 +1,13 @@
 package mcenderdragon.petcollars.common;
 
-import mcenderdragon.petcollars.common.collar.DynamicCollarInstance;
-import mcenderdragon.petcollars.common.collar.ICollar;
 import mcenderdragon.petcollars.common.item.ItemCollarBase;
 import mcenderdragon.petcollars.common.item.ItemList;
 import mcenderdragon.petcollars.common.item.ItemPendantBase;
 import mcenderdragon.petcollars.common.pendant.PendantBase;
 import net.minecraft.entity.item.ItemEntity;
-import net.minecraft.entity.player.PlayerModelPart;
 import net.minecraft.entity.player.ServerPlayerEntity;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundNBT;
-import net.minecraft.network.IPacket;
 import net.minecraft.network.NetworkManager;
 import net.minecraft.network.play.server.SUpdateTileEntityPacket;
 import net.minecraft.tileentity.TileEntity;

@@ -3,7 +3,6 @@ package mcenderdragon.petcollars.common.collar;
 import mcenderdragon.petcollars.common.pendant.PendantBase;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.passive.AnimalEntity;
-import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.IItemProvider;

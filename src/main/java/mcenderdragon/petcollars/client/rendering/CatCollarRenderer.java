@@ -2,8 +2,8 @@ package mcenderdragon.petcollars.client.rendering;
 
 import com.mojang.blaze3d.platform.GlStateManager;
 
-import mcenderdragon.petcollars.client.ICollarRenderer;
 import mcenderdragon.petcollars.client.CollarRenderHelper.ClientCollarState;
+import mcenderdragon.petcollars.client.ICollarRenderer;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.model.ItemCameraTransforms;
 import net.minecraft.entity.passive.CatEntity;

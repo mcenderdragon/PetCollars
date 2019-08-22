@@ -7,8 +7,6 @@ import mcenderdragon.petcollars.client.ICollarRenderer;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.model.ItemCameraTransforms;
 import net.minecraft.entity.passive.AnimalEntity;
-import net.minecraft.entity.passive.PigEntity;
-import net.minecraft.entity.passive.SheepEntity;
 import net.minecraft.item.ItemStack;
 
 public class GeneralCollarRenderer implements ICollarRenderer<AnimalEntity> 

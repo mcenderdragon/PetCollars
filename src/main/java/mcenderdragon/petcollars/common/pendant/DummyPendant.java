@@ -1,14 +1,11 @@
 package mcenderdragon.petcollars.common.pendant;
 
 import mcenderdragon.petcollars.common.collar.ICollar;
-import net.minecraft.block.CampfireBlock;
-import net.minecraft.block.FireBlock;
-import net.minecraft.client.particle.Particle;
 import net.minecraft.entity.passive.AnimalEntity;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.particles.ParticleTypes;
 import net.minecraft.util.DamageSource;
-import net.minecraft.world.ServerWorld;
+import net.minecraft.world.server.ServerWorld;
 
 public class DummyPendant extends PendantBase<DummyAdditionalInfo> 
 {

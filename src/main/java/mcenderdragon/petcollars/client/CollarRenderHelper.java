@@ -6,6 +6,7 @@ import java.util.stream.Stream;
 import mcenderdragon.petcollars.client.color.ItemColoring;
 import mcenderdragon.petcollars.client.rendering.CatCollarRenderer;
 import mcenderdragon.petcollars.client.rendering.CollarRendererLayer;
+import mcenderdragon.petcollars.client.rendering.FoxCollarRenderer;
 import mcenderdragon.petcollars.client.rendering.GeneralCollarRenderer;
 import mcenderdragon.petcollars.client.rendering.HorseCollarRenderer;
 import mcenderdragon.petcollars.client.rendering.SheepCollarRenderer;
@@ -149,7 +150,7 @@ public class CollarRenderHelper
 		InterModComms.sendTo(PetCollarsMain.MODID, "rendering.custom_collar", () -> new GeneralCollarRenderer(PigEntity.class, 0F, -17.5F/16F, -8.5f/16F, 0.94F, 0.94F, 0.94F));
 		InterModComms.sendTo(PetCollarsMain.MODID, "rendering.custom_collar", SheepCollarRenderer::new);
 		InterModComms.sendTo(PetCollarsMain.MODID, "rendering.custom_collar", HorseCollarRenderer::new);
-		
+		InterModComms.sendTo(PetCollarsMain.MODID, "rendering.custom_collar", FoxCollarRenderer::new);
 		
 	}
 	

@@ -95,6 +95,8 @@ public class PetCollarsMain
         () -> new DynamicCollarInstance(new INBTSerializable[0], new PendantBase[0], null, null));
 		
         PacketHandler.init();
+        PendantRegistry.bakeCollarList();
+        CollarRecipeManager.init();
     }
 	
 	private final void clientSetup(FMLClientSetupEvent event)

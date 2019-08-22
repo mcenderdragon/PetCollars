@@ -9,6 +9,7 @@ import mezz.jei.api.IModPlugin;
 import mezz.jei.api.JeiPlugin;
 import mezz.jei.api.ingredients.subtypes.ISubtypeInterpreter;
 import mezz.jei.api.registration.IRecipeCatalystRegistration;
+import mezz.jei.api.registration.IRecipeCategoryRegistration;
 import mezz.jei.api.registration.IRecipeRegistration;
 import mezz.jei.api.registration.ISubtypeRegistration;
 import net.minecraft.item.ItemStack;
@@ -55,5 +56,11 @@ public class PetCollarsJEI implements IModPlugin
 	{
 		System.out.println(Arrays.deepToString(CollarRecipeManager.getAllRecipes().toArray()));
 		registration.addRecipes(CollarRecipeManager.getAllRecipes(), COLLAR_CRAFTER_CATEGORY);
+	}
+	
+	@Override
+	public void registerCategories(IRecipeCategoryRegistration registration) 
+	{
+		registration.addRecipeCategories(new CollarCrafterCategory(registration.getJeiHelpers().getGuiHelper()));
 	}
 }

@@ -11,5 +11,6 @@
 	"item.petcollars.fire_resistance_pendant": "Fire Resistance Pendant",
 	"item.petcollars.fire_immunity_pendant": "Fire Immunity Pendant",
 	"item.petcollars.improvement_pendant": "Improvement Pendant",
-	"item.petcollars.plier": "Plier"
+	"item.petcollars.plier": "Plier",
+	"item.petcollars.plier.tooltip": "This plier can be used to remove a collar from your pet."
 }

@@ -45,5 +45,6 @@ public class MessageRequestCollarInfo
 		{
 			PacketHandler.CHANNEL_PET_COLLARS.send(PacketDistributor.PLAYER.with(ctx::getSender), new MessageResponseCollarInfo(e));
 		}
+		ctx.setPacketHandled(true);
 	}
 }

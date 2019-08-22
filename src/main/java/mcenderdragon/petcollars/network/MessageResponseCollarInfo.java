@@ -109,6 +109,7 @@ public class MessageResponseCollarInfo
 	public static void conume(MessageResponseCollarInfo msg, Supplier<NetworkEvent.Context> context)
 	{
 		DistExecutor.runWhenOn(Dist.CLIENT, () -> msg::executeOnClient);
+		context.get().setPacketHandled(true);
 	}
 	
 	private void executeOnClient()

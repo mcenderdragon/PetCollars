@@ -3,18 +3,24 @@ package mcenderdragon.petcollars.client;
 import java.util.WeakHashMap;
 import java.util.stream.Stream;
 
+import mcenderdragon.petcollars.client.color.ItemColoring;
 import mcenderdragon.petcollars.client.rendering.CatCollarRenderer;
+import mcenderdragon.petcollars.client.rendering.CollarRendererLayer;
 import mcenderdragon.petcollars.client.rendering.GeneralCollarRenderer;
 import mcenderdragon.petcollars.client.rendering.HorseCollarRenderer;
 import mcenderdragon.petcollars.client.rendering.SheepCollarRenderer;
+import mcenderdragon.petcollars.client.rendering.TileCollarCrafterRenderer;
 import mcenderdragon.petcollars.client.rendering.WolfCollarRenderer;
 import mcenderdragon.petcollars.common.HelperCollars;
 import mcenderdragon.petcollars.common.PetCollarsMain;
+import mcenderdragon.petcollars.common.TileEntityCollarCrafter;
 import mcenderdragon.petcollars.common.pendant.PendantBase;
 import mcenderdragon.petcollars.network.MessageRequestCollarInfo;
 import mcenderdragon.petcollars.network.MessageResponseCollarInfo;
 import mcenderdragon.petcollars.network.PacketHandler;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.renderer.entity.EntityRendererManager;
+import net.minecraft.client.renderer.entity.LivingRenderer;
 import net.minecraft.client.world.ClientWorld;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.passive.AnimalEntity;
@@ -26,6 +32,8 @@ import net.minecraft.nbt.CompoundNBT;
 import net.minecraftforge.common.util.INBTSerializable;
 import net.minecraftforge.fml.InterModComms;
 import net.minecraftforge.fml.InterModComms.IMCMessage;
+import net.minecraftforge.fml.client.registry.ClientRegistry;
+import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 
 public class CollarRenderHelper 
 {
@@ -143,5 +151,22 @@ public class CollarRenderHelper
 		InterModComms.sendTo(PetCollarsMain.MODID, "rendering.custom_collar", HorseCollarRenderer::new);
 		
 		
+	}
+	
+	public static void clientSetup(FMLClientSetupEvent event)
+	{
+		EntityRendererManager manager = event.getMinecraftSupplier().get().getRenderManager();
+		manager.renderers.forEach( (clazz,renderer) -> {
+			if(AnimalEntity.class.isAssignableFrom(clazz))
+			{
+				if(renderer instanceof LivingRenderer)
+				{
+					((LivingRenderer) renderer).addLayer(new CollarRendererLayer((LivingRenderer) renderer));
+				}
+			}
+		});
+		ItemColoring.setupColoring();
+		
+		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityCollarCrafter.class, new TileCollarCrafterRenderer());
 	}
 }

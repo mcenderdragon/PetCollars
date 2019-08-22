@@ -6,9 +6,6 @@ import org.apache.logging.log4j.Logger;
 import com.google.common.collect.ImmutableSet;
 
 import mcenderdragon.petcollars.client.CollarRenderHelper;
-import mcenderdragon.petcollars.client.color.ItemColoring;
-import mcenderdragon.petcollars.client.rendering.CollarRendererLayer;
-import mcenderdragon.petcollars.client.rendering.TileCollarCrafterRenderer;
 import mcenderdragon.petcollars.common.collar.CollarCapProvider;
 import mcenderdragon.petcollars.common.collar.DynamicCollarInstance;
 import mcenderdragon.petcollars.common.collar.ICollar;
@@ -17,8 +14,6 @@ import mcenderdragon.petcollars.network.PacketHandler;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.material.MaterialColor;
-import net.minecraft.client.renderer.entity.EntityRendererManager;
-import net.minecraft.client.renderer.entity.LivingRenderer;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.passive.AnimalEntity;
 import net.minecraft.nbt.INBT;
@@ -37,9 +32,7 @@ import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.DistExecutor;
-import net.minecraftforge.fml.client.registry.ClientRegistry;
 import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.InterModEnqueueEvent;
 import net.minecraftforge.fml.event.lifecycle.InterModProcessEvent;
@@ -64,7 +57,7 @@ public class PetCollarsMain
 		IEventBus modBus = FMLJavaModLoadingContext.get().getModEventBus();
 		
 		modBus.addListener(this::setup);
-		modBus.addListener(this::clientSetup);
+		DistExecutor.runWhenOn(Dist.CLIENT, ()-> ()-> modBus.addListener(CollarRenderHelper::clientSetup));
 		modBus.addListener(this::sendIMC);
 		modBus.addListener(this::collectIMC);
 		
@@ -98,23 +91,6 @@ public class PetCollarsMain
         PendantRegistry.bakeCollarList();
         CollarRecipeManager.init();
     }
-	
-	private final void clientSetup(FMLClientSetupEvent event)
-	{
-		EntityRendererManager manager = event.getMinecraftSupplier().get().getRenderManager();
-		manager.renderers.forEach( (clazz,renderer) -> {
-			if(AnimalEntity.class.isAssignableFrom(clazz))
-			{
-				if(renderer instanceof LivingRenderer)
-				{
-					((LivingRenderer) renderer).addLayer(new CollarRendererLayer((LivingRenderer) renderer));
-				}
-			}
-		});
-		ItemColoring.setupColoring();
-		
-		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityCollarCrafter.class, new TileCollarCrafterRenderer());
-	}
 	
 	private final void sendIMC(InterModEnqueueEvent event)
 	{

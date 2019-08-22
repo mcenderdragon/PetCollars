@@ -10,6 +10,7 @@ import javax.annotation.Nullable;
 import mcenderdragon.petcollars.common.collar.CollarCapProvider;
 import mcenderdragon.petcollars.common.collar.ICollar;
 import mcenderdragon.petcollars.common.item.ItemCollarBase;
+import mcenderdragon.petcollars.common.item.ItemList;
 import mcenderdragon.petcollars.common.pendant.PendantBase;
 import mcenderdragon.petcollars.network.MessageResponseCollarInfo;
 import mcenderdragon.petcollars.network.PacketHandler;
@@ -30,6 +31,7 @@ import net.minecraftforge.fml.LogicalSide;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.network.PacketDistributor;
 import net.minecraftforge.fml.network.PacketDistributor.TargetPoint;
+import net.minecraftforge.registries.ForgeRegistries;
 
 @Mod.EventBusSubscriber(modid = PetCollarsMain.MODID)
 public class HelperCollars 
@@ -204,5 +206,37 @@ public class HelperCollars
 	public static ItemStack createCollarStack(ICollar collar)
 	{
 		return createCollarStack(collar.asItem(), collar.getAllPendants(), collar.getAllAdditionalInfo());
+	}
+	
+	public static ItemStack createPendantStack(PendantBase<INBTSerializable<CompoundNBT>> pendant, INBTSerializable<CompoundNBT> additionalData)
+	{
+		if(pendant!=null)
+		{
+			ResourceLocation id = pendant.getRegistryName();
+			ItemStack pendantStack;
+			if(ForgeRegistries.ITEMS.containsKey(id))
+			{
+				pendantStack = new ItemStack(ForgeRegistries.ITEMS.getValue(id));
+				pendantStack.setTag(new CompoundNBT());
+			}
+			else
+			{
+				pendantStack = new ItemStack(ItemList.dummy_pendant);
+				pendantStack.setTag(new CompoundNBT());
+				pendantStack.getTag().putString("dummy", id.toString());
+			}
+			CompoundNBT nbt = additionalData.serializeNBT();
+			if(nbt == null)
+			{
+				throw new NullPointerException(additionalData.getClass() + "#serializeNBT retuned null: " + additionalData.toString());
+			}
+			pendantStack.getTag().put("pendant", nbt);
+			
+			return pendantStack;
+		}
+		else
+		{
+			return ItemStack.EMPTY;
+		}
 	}
 }

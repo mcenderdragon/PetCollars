@@ -175,21 +175,7 @@ public class TileEntityCollarCrafter extends TileEntity
 				{
 					if(pendants[i]!=null)
 					{
-						ResourceLocation id = pendants[i].getRegistryName();
-						ItemStack pendantStack;
-						if(ForgeRegistries.ITEMS.containsKey(id))
-						{
-							pendantStack = new ItemStack(ForgeRegistries.ITEMS.getValue(id));
-							pendantStack.setTag(new CompoundNBT());
-						}
-						else
-						{
-							pendantStack = new ItemStack(ItemList.dummy_pendant);
-							pendantStack.setTag(new CompoundNBT());
-							pendantStack.getTag().putString("dummy", id.toString());
-						}
-						pendantStack.getTag().put("pendant", data[i].serializeNBT());
-						
+						ItemStack pendantStack = HelperCollars.createPendantStack(pendants[i], data[i]);
 						handler.setStackInSlot(i+1, pendantStack);
 					}
 				}

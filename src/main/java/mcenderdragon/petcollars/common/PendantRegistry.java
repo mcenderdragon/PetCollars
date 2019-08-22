@@ -1,7 +1,12 @@
 package mcenderdragon.petcollars.common;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+
 import javax.annotation.Nullable;
 
+import mcenderdragon.petcollars.common.item.ItemCollarBase;
 import mcenderdragon.petcollars.common.pendant.PendantBase;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.registries.IForgeRegistry;
@@ -30,32 +35,58 @@ public class PendantRegistry
 	
 	 private static class PendantCallbacks implements IForgeRegistry.AddCallback<PendantBase<?>>, IForgeRegistry.ClearCallback<PendantBase<?>>, IForgeRegistry.BakeCallback<PendantBase<?>>, IForgeRegistry.CreateCallback<PendantBase<?>>
 	 {
-	        static final PendantCallbacks INSTANCE = new PendantCallbacks();
+		 static final PendantCallbacks INSTANCE = new PendantCallbacks();
 
-	        @Override
-	        public void onAdd(IForgeRegistryInternal<PendantBase<?>> owner, RegistryManager stage, int id, PendantBase<?> block, @Nullable PendantBase<?> oldBlock)
-	        {
+		 @Override
+		 public void onAdd(IForgeRegistryInternal<PendantBase<?>> owner, RegistryManager stage, int id, PendantBase<?> block, @Nullable PendantBase<?> oldBlock)
+		 {
 	            
-	        }
+		 }
 
-	        @Override
-	        public void onClear(IForgeRegistryInternal<PendantBase<?>> owner, RegistryManager stage)
-	        {
+		 @Override
+		 public void onClear(IForgeRegistryInternal<PendantBase<?>> owner, RegistryManager stage)
+		 {
 	           
-	        }
+		 }
 
-	        @Override
-	        public void onCreate(IForgeRegistryInternal<PendantBase<?>> owner, RegistryManager stage)
-	        {
-	            
-	        }
+		 @Override
+		 public void onCreate(IForgeRegistryInternal<PendantBase<?>> owner, RegistryManager stage)
+		 {
+			 
+		 }
 
-	        @Override
-	        public void onBake(IForgeRegistryInternal<PendantBase<?>> owner, RegistryManager stage)
-	        {
+		 @Override
+		 public void onBake(IForgeRegistryInternal<PendantBase<?>> owner, RegistryManager stage)
+		 {
 	            
-	        }
+		 }
 
 	       
-	    }
+	 }
+	 
+	 private static boolean baked = false;
+	 private static List<ItemCollarBase> collarList = new ArrayList<>(2);
+	 
+	 public static void registerCollarItem(ItemCollarBase collar)
+	 {		 
+		 collarList.add(collar);
+	 }
+	 
+	 public static void bakeCollarList()
+	 {
+		 if(!baked)
+		 {
+			 ((ArrayList<ItemCollarBase>)collarList).trimToSize();
+			 collarList = Collections.unmodifiableList(collarList);
+			 baked = true;
+		 }
+	 }
+	 
+	 public static List<ItemCollarBase> getCollarList()
+	 {
+		 if(baked)
+			 return collarList;
+		 else
+			 return Collections.emptyList();
+	 }
 }

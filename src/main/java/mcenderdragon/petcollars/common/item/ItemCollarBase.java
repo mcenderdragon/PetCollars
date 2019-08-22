@@ -51,6 +51,7 @@ public class ItemCollarBase extends Item
 				return 0;
 			}
 		});
+		PendantRegistry.registerCollarItem(this);
 	}
 
 	public ICollar createCollar(CompoundNBT nbt, AnimalEntity animal, PendantBase<INBTSerializable<CompoundNBT>>[] pendants, INBTSerializable<CompoundNBT>[] data)
@@ -61,6 +62,7 @@ public class ItemCollarBase extends Item
 		return new DynamicCollarInstance(data, pendants, animal, this);
 	}
 	
+	@SuppressWarnings("unchecked")
 	public ICollar createCollar(ItemStack stack, AnimalEntity animal)
 	{
 		CompoundNBT nbt = stack.getChildTag("pendants");
@@ -113,6 +115,7 @@ public class ItemCollarBase extends Item
 		}
 	}
 	
+	@SuppressWarnings("unchecked")
 	@Override
 	public void fillItemGroup(ItemGroup group, NonNullList<ItemStack> items) 
 	{

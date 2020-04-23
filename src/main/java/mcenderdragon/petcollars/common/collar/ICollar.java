@@ -59,7 +59,7 @@ public interface ICollar extends IItemProvider
 	
 	/**
 	 * 
-	 * @return the ANimal wearing this collar
+	 * @return the Animal wearing this collar
 	 */
 	public AnimalEntity getAnimal();
 

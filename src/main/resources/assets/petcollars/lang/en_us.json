@@ -5,12 +5,14 @@
 	
 	"item.petcollars.leather_collar": "Leather Collar",
 	"item.petcollars.gold_collar": "Gold Collar",
+	"item.petcollars.nether_collar": "Nether Collar",
 	"item.petcollars.dummy_pendant": "Dummy Pendant",
 	"item.petcollars.heat_resistance_pendant": "Heat Resistance Pendant",
 	"item.petcollars.fire_insensitive_pendant": "Fire Insensitive Pendant",
 	"item.petcollars.fire_resistance_pendant": "Fire Resistance Pendant",
 	"item.petcollars.fire_immunity_pendant": "Fire Immunity Pendant",
 	"item.petcollars.improvement_pendant": "Improvement Pendant",
+	"item.petcollars.wither_pendant": "Wither Pendant",
 	"item.petcollars.plier": "Plier",
 	"item.petcollars.plier.tooltip": "This plier can be used to remove a collar from your pet."
 }

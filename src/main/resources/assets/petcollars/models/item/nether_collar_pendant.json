@@ -1,0 +1,9 @@
+{
+    "parent": "item/generated",
+    "textures": {
+        "layer0": "petcollars:items/nether_collar",
+		"layer1": "petcollars:items/nether_collar_pendant_1",
+		"layer2": "petcollars:items/nether_collar_pendant_2",
+		"layer3": "petcollars:items/nether_collar_pendant_3"
+    }
+}

@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " I ",
+    "L L",
+    "LGL"
+  ],
+  "key": {
+    "L": {
+      "item": "minecraft:leather"
+    },
+    "I": {
+      "tag": "forge:gems/prismarine"
+    },
+    "G": {
+      "item": "minecraft:nether_wart_block"
+    }
+  },
+  "result": {
+    "item": "petcollars:nether_collar",
+    "count": 1
+  }
+}

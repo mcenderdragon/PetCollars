@@ -18,12 +18,12 @@ public class ItemColoring
 		ItemColors itemC = Minecraft.getInstance().getItemColors();
 		BlockColors blockC = Minecraft.getInstance().getBlockColors();
 		
-		itemC.register(ItemColoring::getColorFromCollar, ItemList.leather_collar, ItemList.gold_collar);
+		itemC.register(ItemColoring::getColorFromCollar, ItemList.leather_collar, ItemList.gold_collar, ItemList.nether_collar);
 	}
 		
 	public static int getColorFromCollar(ItemStack stack, int layer)
 	{
-		if(layer == 1 || layer == 2)
+		if(layer == 1 || layer == 2 || layer == 3)
 		{
 			CompoundNBT nbt = stack.getChildTag("pendants");
 			if(nbt !=null)

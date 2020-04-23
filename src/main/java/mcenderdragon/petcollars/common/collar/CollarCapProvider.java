@@ -1,5 +1,6 @@
 package mcenderdragon.petcollars.common.collar;
 
+import java.lang.ref.WeakReference;
 import java.util.UUID;
 import java.util.WeakHashMap;
 
@@ -22,7 +23,7 @@ public class CollarCapProvider implements ICapabilityProvider, INBTSerializable<
 {
 	private static final WeakHashMap<AnimalEntity, CollarCapProvider> animalProviderMap = new WeakHashMap<AnimalEntity, CollarCapProvider>();
 	
-	public final AnimalEntity animal;
+	public final WeakReference<AnimalEntity> animal;
 	
 	private LazyOptional<ICollar> opt;
 	
@@ -30,7 +31,7 @@ public class CollarCapProvider implements ICapabilityProvider, INBTSerializable<
 	
 	public CollarCapProvider(AnimalEntity animal) 
 	{
-		this.animal = animal;
+		this.animal = new WeakReference<AnimalEntity>(animal);
 		animalProviderMap.put(animal, this);
 	}
 	
@@ -81,25 +82,29 @@ public class CollarCapProvider implements ICapabilityProvider, INBTSerializable<
 		if(inbt instanceof CompoundNBT)
 		{
 			CompoundNBT nbt = (CompoundNBT) inbt;
-			UUID current = animal.getUniqueID();
-			
-			if(nbt.hasUniqueId("animalID"))
+			AnimalEntity animal = this.animal.get();
+			if(animal !=null)
 			{
-				UUID storedId = nbt.getUniqueId("animalID");
-				if(current.equals(storedId))
+				UUID current = animal.getUniqueID();
+				
+				if(nbt.hasUniqueId("animalID"))
 				{
-					PendantBase<INBTSerializable<CompoundNBT>>[] pendants = HelperCollars.loadPendants(nbt);
-					INBTSerializable<CompoundNBT>[] data = HelperCollars.loadAdditionalInfo(nbt, pendants);
-					
-					ItemCollarBase collar = (ItemCollarBase) ForgeRegistries.ITEMS.getValue(new ResourceLocation(nbt.getString("collar")));
-					if(collar!=null)
+					UUID storedId = nbt.getUniqueId("animalID");
+					if(current.equals(storedId))
 					{
-						deserializedInstance = collar.createCollar(nbt, animal, pendants, data);
+						PendantBase<INBTSerializable<CompoundNBT>>[] pendants = HelperCollars.loadPendants(nbt);
+						INBTSerializable<CompoundNBT>[] data = HelperCollars.loadAdditionalInfo(nbt, pendants);
+						
+						ItemCollarBase collar = (ItemCollarBase) ForgeRegistries.ITEMS.getValue(new ResourceLocation(nbt.getString("collar")));
+						if(collar!=null)
+						{
+							deserializedInstance = collar.createCollar(nbt, animal, pendants, data);
+						}
 					}
-				}
-				else
-				{
-					throw new IllegalStateException("UUID mismatch:" + current + " != " + storedId);
+					else
+					{
+						throw new IllegalStateException("UUID mismatch:" + current + " != " + storedId);
+					}
 				}
 			}
 		}

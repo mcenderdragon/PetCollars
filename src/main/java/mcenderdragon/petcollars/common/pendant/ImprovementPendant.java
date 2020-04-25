@@ -46,9 +46,9 @@ public class ImprovementPendant extends PendantBase<ImprovementInfo>
 	{
 		int armor = Math.min(Math.max(0, customInfo.getArmorLvl() / 10) - 1,  4);
 		if(armor >= 0)
-			animal.addPotionEffect(new EffectInstance(Effects.RESISTANCE, 25, armor));
+			animal.addPotionEffect(new EffectInstance(Effects.RESISTANCE, 21, armor));
 		
-		animal.addPotionEffect(new EffectInstance(Effects.STRENGTH, 25, customInfo.getAttackLvl()));
+		animal.addPotionEffect(new EffectInstance(Effects.STRENGTH, 21, customInfo.getAttackLvl()));
 		
 		if(customInfo.needsUpdate)
 		{

@@ -24,7 +24,7 @@ public class GlowingPendant extends PendantBase<DummyAdditionalInfo>
 	@Override
 	public void update(AnimalEntity animal, AbstractCollarInstance collar, DummyAdditionalInfo customInfo) 
 	{
-		animal.addPotionEffect(new EffectInstance(Effects.GLOWING, 20));
+		animal.addPotionEffect(new EffectInstance(Effects.GLOWING, 21));
 	}
 	
 	@Override

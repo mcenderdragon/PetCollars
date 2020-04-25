@@ -14,5 +14,6 @@
 	"item.petcollars.improvement_pendant": "Improvement Pendant",
 	"item.petcollars.wither_pendant": "Wither Pendant",
 	"item.petcollars.plier": "Plier",
-	"item.petcollars.plier.tooltip": "This plier can be used to remove a collar from your pet."
+	"item.petcollars.plier.tooltip": "This plier can be used to remove a collar from your pet.",
+	"item.petcollars.glowing_pendant": "Glowing Pendant"
 }

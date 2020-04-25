@@ -25,6 +25,7 @@ public class ItemList
 	public static final Item fire_immunity_pendant = new ItemPendantBase(new Item.Properties().group(ItemGroup.COMBAT).rarity(Rarity.EPIC), PendantList.fire_immunity_pendant).setRegistryName(PetCollarsMain.MODID, "fire_immunity_pendant");
 	public static final Item improvement_pendant = new ItemPendantBase(new Item.Properties().group(ItemGroup.COMBAT).rarity(Rarity.COMMON), PendantList.improvement_pendant).setRegistryName(PetCollarsMain.MODID, "improvement_pendant");
 	public static final Item wither_pendant = new ItemPendantBase(new Item.Properties().group(ItemGroup.COMBAT).rarity(Rarity.COMMON), PendantList.wither_pendant).setRegistryName(PetCollarsMain.MODID, "wither_pendant");
+	public static final Item glwoing_pendant = new ItemPendantBase(new Item.Properties().group(ItemGroup.COMBAT).rarity(Rarity.UNCOMMON), PendantList.glowing_pendant).setRegistryName(PetCollarsMain.MODID, "glowing_pendant");
 	
 	
 	public static void init(Consumer<Item> register)
@@ -41,6 +42,7 @@ public class ItemList
 		register.accept(fire_immunity_pendant);
 		register.accept(improvement_pendant);
 		register.accept(wither_pendant);
+		register.accept(glwoing_pendant);
 		
 		register.accept(new BlockItem(PetCollarsMain.collar_crafter, new Item.Properties().group(ItemGroup.REDSTONE)).setRegistryName(PetCollarsMain.collar_crafter.getRegistryName()));
 	}
